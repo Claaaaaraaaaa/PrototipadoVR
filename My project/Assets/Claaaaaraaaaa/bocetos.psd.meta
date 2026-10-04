@@ -100,10 +100,10 @@ TextureImporter:
       name: bocetos_0
       rect:
         serializedVersion: 2
-        x: 109
-        y: 3895
-        width: 134
-        height: 186
+        x: 47
+        y: 3867
+        width: 334
+        height: 229
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -122,10 +122,10 @@ TextureImporter:
       name: bocetos_1
       rect:
         serializedVersion: 2
-        x: 321
-        y: 3719
-        width: 278
-        height: 366
+        x: 417
+        y: 3857
+        width: 332
+        height: 166
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,9 +145,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 47
-        y: 3289
-        width: 580
-        height: 305
+        y: 3629
+        width: 334
+        height: 230
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -158,6 +158,94 @@ TextureImporter:
       bones: []
       spriteID: af565e81b4934f94999f0f3405d14684
       internalID: 1545052380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bocetos_3
+      rect:
+        serializedVersion: 2
+        x: 453
+        y: 3633
+        width: 134
+        height: 186
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc0540744744043448e5d45fb3489c5d
+      internalID: 1979512103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bocetos_4
+      rect:
+        serializedVersion: 2
+        x: 635
+        y: 3475
+        width: 278
+        height: 368
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e7fb03340a90db44979db995ea473a6
+      internalID: -951752755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bocetos_5
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 3280
+        width: 592
+        height: 314
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a380655f9a6a3c44b6047ba1462df5b
+      internalID: -412466662
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bocetos_6
+      rect:
+        serializedVersion: 2
+        x: 772
+        y: 3872
+        width: 135
+        height: 220
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9916af96f7ed0284f8a50db2560529fd
+      internalID: -1077674820
       vertices: []
       indices: 
       edges: []
@@ -181,6 +269,10 @@ TextureImporter:
       bocetos_0: 2006525584
       bocetos_1: -783646149
       bocetos_2: 1545052380
+      bocetos_3: 1979512103
+      bocetos_4: -951752755
+      bocetos_5: -412466662
+      bocetos_6: -1077674820
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
