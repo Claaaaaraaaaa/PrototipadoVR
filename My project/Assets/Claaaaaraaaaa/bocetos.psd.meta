@@ -237,7 +237,7 @@ TextureImporter:
         width: 135
         height: 220
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -246,6 +246,28 @@ TextureImporter:
       bones: []
       spriteID: 9916af96f7ed0284f8a50db2560529fd
       internalID: -1077674820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bocetos_7
+      rect:
+        serializedVersion: 2
+        x: 909
+        y: 3836
+        width: 352
+        height: 245
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe76eed71b4c9ef4fb0384e23a61d023
+      internalID: -535571086
       vertices: []
       indices: 
       edges: []
@@ -273,6 +295,7 @@ TextureImporter:
       bocetos_4: -951752755
       bocetos_5: -412466662
       bocetos_6: -1077674820
+      bocetos_7: -535571086
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
