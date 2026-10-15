@@ -962,7 +962,7 @@ GameObject:
   - component: {fileID: 380835099}
   - component: {fileID: 380835106}
   m_Layer: 0
-  m_Name: '[BuildingBlock] Cube'
+  m_Name: 'Puerta Inferior Nevera [BuildingBlock]'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1066,7 +1066,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Oculus.Interaction::Oculus.Interaction.OneGrabRotateTransformer
   _pivotTransform: {fileID: 0}
-  _rotationAxis: 1
+  _rotationAxis: 0
   _constraints:
     MinAngle:
       Constrain: 1
