@@ -9,6 +9,7 @@ public class ControlFogon : MonoBehaviour
     public void AlternarFogon()
     {
         encendido = !encendido;
+        Debug.Log("Fogón encendido: " + encendido);
 
         if (efectoFogon != null)
             efectoFogon.SetActive(encendido);
