@@ -1,63 +1,71 @@
 
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class NavegacionCocina : MonoBehaviour
 {
+    [Serializable]
+    public class Zona
+    {
+        public string nombre;
+        public Transform destino;
+        public GameObject panel;
+    }
+
     [Header("Jugador")]
     [SerializeField] private Transform cameraRig;
 
-    [Header("Destinos")]
-    [SerializeField] private Transform destinoBarra;
-    [SerializeField] private Transform destinoEstufa;
-    [SerializeField] private Transform destinoNevera;
-
-    [Header("Paneles")]
+    [Header("Panel inicial")]
     [SerializeField] private GameObject panelInicio;
-    [SerializeField] private GameObject panelBarra;
-    [SerializeField] private GameObject panelEstufa;
-    [SerializeField] private GameObject panelNevera;
 
-    public void IrBarra()
+    [Header("Zonas de navegación")]
+    [SerializeField] private List<Zona> zonas = new List<Zona>();
+
+    public void IrABarra() => IrAZona("Barra");
+    public void IrAEstufa() => IrAZona("Estufa");
+    public void IrANevera() => IrAZona("Nevera");
+    public void IrAAlacena() => IrAZona("Alacena");
+
+    public void IrAZona(string nombreZona)
     {
-        Teletransportar(destinoBarra);
-        MostrarPanel(panelBarra);
+        Zona zona = zonas.Find(z =>
+            string.Equals(z.nombre, nombreZona,
+                StringComparison.OrdinalIgnoreCase));
+
+        if (zona == null)
+        {
+            Debug.LogError("No existe una zona llamada: " + nombreZona);
+            return;
+        }
+
+        if (zona.destino == null)
+        {
+            Debug.LogError("Falta asignar el destino de: " + nombreZona);
+            return;
+        }
+
+        Teletransportar(zona.destino);
+        MostrarPanel(zona.panel);
     }
 
-    public void IrEstufa()
-    {
-        Teletransportar(destinoEstufa);
-        MostrarPanel(panelEstufa);
-    }
-
-    public void IrNevera()
-    {
-        Teletransportar(destinoNevera);
-        MostrarPanel(panelNevera);
-    }
-
-    private void MostrarPanel(GameObject panel)
+    private void MostrarPanel(GameObject panelActual)
     {
         if (panelInicio != null)
             panelInicio.SetActive(false);
 
-        if (panelBarra != null)
-            panelBarra.SetActive(false);
-
-        if (panelEstufa != null)
-            panelEstufa.SetActive(false);
-
-        if (panelNevera != null)
-            panelNevera.SetActive(false);
-
-        if (panel != null)
-            panel.SetActive(true);
+        foreach (Zona zona in zonas)
+        {
+            if (zona.panel != null)
+                zona.panel.SetActive(zona.panel == panelActual);
+        }
     }
 
     private void Teletransportar(Transform destino)
     {
-        if (cameraRig == null || destino == null)
+        if (cameraRig == null)
         {
-            Debug.LogError("Falta asignar el Camera Rig o el destino.");
+            Debug.LogError("Falta asignar el Camera Rig.");
             return;
         }
 
