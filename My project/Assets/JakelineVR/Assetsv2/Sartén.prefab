@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3504435874224852245}
   - component: {fileID: 6713669057864979451}
   - component: {fileID: 2818371783566137767}
+  - component: {fileID: 8034723984086273604}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -90,6 +91,27 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &8034723984086273604
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 21419848527044409}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.020000013, y: 0.021418558, z: 0.0018103318}
+  m_Center: {x: 0.0000000012637089, y: 0.0007092976, z: 0.004935323}
 --- !u!1 &4556099284380816529
 GameObject:
   m_ObjectHideFlags: 0
@@ -134,6 +156,7 @@ GameObject:
   - component: {fileID: 4511469581004963707}
   - component: {fileID: 8780335432482233694}
   - component: {fileID: 6680713779043088643}
+  - component: {fileID: 5733691653996092689}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -213,3 +236,24 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &5733691653996092689
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7793886418991278354}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.08380153, y: 0.020000005, z: 0.020000007}
+  m_Center: {x: 0.031899884, y: -0.0000076018987, z: 0.000000002424901}
