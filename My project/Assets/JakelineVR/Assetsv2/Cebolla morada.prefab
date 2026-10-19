@@ -99,6 +99,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6455529450293373756}
+  - component: {fileID: 8003790068991994937}
   m_Layer: 0
   m_Name: Cebolla morada
   m_TagString: Untagged
@@ -128,6 +129,27 @@ Transform:
   - {fileID: 3944934373820757115}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8003790068991994937
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5441520850396005287}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.4005926, y: 2.5783591, z: 2.2033288}
+  m_Center: {x: -0.035207752, y: 1.2974954, z: -0.017707549}
 --- !u!1 &6542805070896283493
 GameObject:
   m_ObjectHideFlags: 0
