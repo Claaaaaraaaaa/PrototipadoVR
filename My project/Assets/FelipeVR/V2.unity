@@ -1999,9 +1999,17 @@ PrefabInstance:
       propertyPath: instanceId
       value: 68aff8ad-1050-422a-84c9-3c4955a1e7f5
       objectReference: {fileID: 0}
+    - target: {fileID: 2293200043650770441, guid: 29b8f4923f1647a44aa0217a98e02734, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3010641811057084145, guid: 29b8f4923f1647a44aa0217a98e02734, type: 3}
       propertyPath: m_Name
       value: 'Puerta Superior Nevera [BuildingBlock]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010641811057084145, guid: 29b8f4923f1647a44aa0217a98e02734, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4152795140059885670, guid: 29b8f4923f1647a44aa0217a98e02734, type: 3}
       propertyPath: instanceId
@@ -9402,9 +9410,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 543450653106057855}
     m_Modifications:
+    - target: {fileID: 665290797783594279, guid: 29b8f4923f1647a44aa0217a98e02734, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2293200043650770441, guid: 29b8f4923f1647a44aa0217a98e02734, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3010641811057084145, guid: 29b8f4923f1647a44aa0217a98e02734, type: 3}
       propertyPath: m_Name
       value: 'Puerta Inferior Nevera [BuildingBlock]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010641811057084145, guid: 29b8f4923f1647a44aa0217a98e02734, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4506893094996027349, guid: 29b8f4923f1647a44aa0217a98e02734, type: 3}
       propertyPath: m_LocalScale.x
@@ -9538,6 +9558,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1380547010}
   - component: {fileID: 1380547009}
+  - component: {fileID: 1380547011}
   m_Layer: 0
   m_Name: bocetos_7
   m_TagString: Untagged
@@ -9619,6 +9640,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!65 &1380547011
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1380547008}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3.74, y: 3.4200008, z: 0.20000003}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1381509807
 GameObject:
   m_ObjectHideFlags: 0
@@ -22547,6 +22589,7 @@ GameObject:
   - component: {fileID: 7967766325331553908}
   - component: {fileID: 8482381505776988863}
   - component: {fileID: 8418640414122900714}
+  - component: {fileID: 8482381505776988864}
   m_Layer: 0
   m_Name: Cube.003
   m_TagString: Untagged
@@ -42268,6 +42311,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2076850630928103909}
   m_Mesh: {fileID: -8678823145569952518, guid: 7ab68e8052986604b981d67802ce255d, type: 3}
+--- !u!65 &8482381505776988864
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2076850630928103909}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.002283426, y: 0.020000007, z: 0.013858143}
+  m_Center: {x: -0.00070091395, y: -0.010000063, z: 5.8207657e-12}
 --- !u!33 &8482381505886057555
 MeshFilter:
   m_ObjectHideFlags: 0

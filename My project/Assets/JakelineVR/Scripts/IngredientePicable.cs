@@ -1,4 +1,4 @@
-
+using System.Collections;
 using UnityEngine;
 
 public class IngredientePicable : MonoBehaviour
@@ -29,9 +29,7 @@ public class IngredientePicable : MonoBehaviour
 
         if (modeloEntero == null || modeloPicado == null)
         {
-            Debug.LogWarning(
-                "Asigna los modelos entero y picado en " + gameObject.name
-            );
+            Debug.LogWarning("Asigna los modelos entero y picado en " + gameObject.name);
             return;
         }
 
@@ -43,7 +41,6 @@ public class IngredientePicable : MonoBehaviour
         Debug.Log("Ingrediente picado: " + gameObject.name);
     }
 
-
     public void IncorporarAlaOlla(Transform puntoDestino)
     {
         if (!yaPicado || dentroDeOlla || puntoDestino == null)
@@ -51,12 +48,8 @@ public class IngredientePicable : MonoBehaviour
 
         dentroDeOlla = true;
 
-        // Guardar la escala mundial antes de cambiar de padre.
-        Vector3 escalaMundo = transform.lossyScale;
-
-        // Desactivar el agarre del ingrediente.
-        foreach (MonoBehaviour componente in
-                 GetComponentsInChildren<MonoBehaviour>(true))
+        // Desactivar el agarre
+        foreach (MonoBehaviour componente in GetComponentsInChildren<MonoBehaviour>(true))
         {
             string nombre = componente.GetType().Name;
 
@@ -69,11 +62,26 @@ public class IngredientePicable : MonoBehaviour
             }
         }
 
-        // Detener la física.
-        Rigidbody rb = GetComponent<Rigidbody>();
+        // Desactivar colliders
+        foreach (Collider col in GetComponentsInChildren<Collider>(true))
+            col.enabled = false;
 
-        if (rb == null)
-            rb = GetComponentInChildren<Rigidbody>();
+        StartCoroutine(ColocarEnOlla(puntoDestino));
+    }
+
+    private IEnumerator ColocarEnOlla(Transform puntoDestino)
+    {
+        // Esperar un frame para que el sistema de agarre termine de mover el objeto
+        yield return null;
+
+        // Buscar el Rigidbody también en los padres
+        Rigidbody rb = GetComponentInParent<Rigidbody>();
+        if (rb == null) rb = GetComponentInChildren<Rigidbody>();
+
+        // El objeto que realmente hay que mover es el que tiene el Rigidbody
+        Transform raiz = rb != null ? rb.transform : transform;
+
+        Vector3 escalaMundo = raiz.lossyScale;
 
         if (rb != null)
         {
@@ -81,31 +89,42 @@ public class IngredientePicable : MonoBehaviour
             rb.angularVelocity = Vector3.zero;
             rb.isKinematic = true;
             rb.useGravity = false;
+            rb.interpolation = RigidbodyInterpolation.None;
         }
 
-        // Desactivar los colliders del ingrediente.
-        foreach (Collider col in GetComponentsInChildren<Collider>(true))
-            col.enabled = false;
+        raiz.SetParent(null, true);
+        raiz.rotation = puntoDestino.rotation;
 
-        // Colocar el ingrediente en el destino.
-        transform.SetParent(null, true);
-        transform.position = puntoDestino.position;
-        transform.rotation = puntoDestino.rotation;
+        // Compensar el pivote: alinear el centro visual con el punto destino
+        Vector3 offset = Vector3.zero;
+        Renderer[] renderers = modeloPicado.GetComponentsInChildren<Renderer>();
 
-        // Hacer que siga a la olla al moverla.
+        if (renderers.Length > 0)
+        {
+            Bounds b = renderers[0].bounds;
+            foreach (Renderer r in renderers)
+                b.Encapsulate(r.bounds);
+
+            offset = raiz.position - b.center;
+        }
+
+        raiz.position = puntoDestino.position + offset;
+
+        // Hacerlo hijo de la olla
         Transform olla = puntoDestino.parent;
-        transform.SetParent(olla, true);
 
-        // Conservar el tamaño visual.
-        Vector3 escalaPadre = transform.parent.lossyScale;
+        if (olla != null)
+        {
+            raiz.SetParent(olla, true);
 
-        transform.localScale = new Vector3(
-            escalaMundo.x / escalaPadre.x,
-            escalaMundo.y / escalaPadre.y,
-            escalaMundo.z / escalaPadre.z
-        );
+            Vector3 ep = olla.lossyScale;
+            raiz.localScale = new Vector3(
+                escalaMundo.x / ep.x,
+                escalaMundo.y / ep.y,
+                escalaMundo.z / ep.z);
+        }
 
+        Physics.SyncTransforms();
         Debug.Log("Ingrediente colocado dentro de la olla.");
     }
-
 }
