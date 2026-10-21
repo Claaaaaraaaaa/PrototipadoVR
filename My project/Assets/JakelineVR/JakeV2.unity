@@ -4746,6 +4746,7 @@ GameObject:
   - component: {fileID: 543264849}
   - component: {fileID: 543264848}
   - component: {fileID: 543264847}
+  - component: {fileID: 543264851}
   m_Layer: 5
   m_Name: Comienzo
   m_TagString: Untagged
@@ -4837,6 +4838,28 @@ RectTransform:
   m_AnchoredPosition: {x: -3.5633469, y: 3.16}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &543264851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 543264846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d5dba7418420b948849f43c502d3cff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PanelSeguirCamara
+  camara: {fileID: 1659400441}
+  distancia: 1.5
+  offsetY: -0.1
+  seguirEjeY: 0
+  suavizadoPosicion: 2
+  umbralMovimiento: 0.25
+  distanciaMaxima: 4
+  suavizadoRotacion: 3
+  invertirFrente: 0
+  mostrarDebug: 1
 --- !u!1 &547942977
 GameObject:
   m_ObjectHideFlags: 0
@@ -5695,6 +5718,7 @@ GameObject:
   - component: {fileID: 657076850}
   - component: {fileID: 657076849}
   - component: {fileID: 657076848}
+  - component: {fileID: 657076852}
   m_Layer: 5
   m_Name: ZonaEstufa
   m_TagString: Untagged
@@ -5786,6 +5810,28 @@ RectTransform:
   m_AnchoredPosition: {x: -1.9013519, y: 3.374}
   m_SizeDelta: {x: 4414.6504, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &657076852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 657076847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d5dba7418420b948849f43c502d3cff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PanelSeguirCamara
+  camara: {fileID: 1659400441}
+  distancia: 1.5
+  offsetY: -0.1
+  seguirEjeY: 0
+  suavizadoPosicion: 2
+  umbralMovimiento: 0.25
+  distanciaMaxima: 4
+  suavizadoRotacion: 3
+  invertirFrente: 0
+  mostrarDebug: 1
 --- !u!1 &660596891
 GameObject:
   m_ObjectHideFlags: 0
@@ -7075,6 +7121,7 @@ GameObject:
   - component: {fileID: 764454078}
   - component: {fileID: 764454077}
   - component: {fileID: 764454076}
+  - component: {fileID: 764454080}
   m_Layer: 5
   m_Name: ZonaAlacena
   m_TagString: Untagged
@@ -7166,6 +7213,28 @@ RectTransform:
   m_AnchoredPosition: {x: -2.337, y: 3.374}
   m_SizeDelta: {x: 4414.6504, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &764454080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 764454075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d5dba7418420b948849f43c502d3cff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PanelSeguirCamara
+  camara: {fileID: 1659400441}
+  distancia: 1.5
+  offsetY: -0.1
+  seguirEjeY: 0
+  suavizadoPosicion: 2
+  umbralMovimiento: 0.25
+  distanciaMaxima: 4
+  suavizadoRotacion: 3
+  invertirFrente: 0
+  mostrarDebug: 1
 --- !u!1 &805302305
 GameObject:
   m_ObjectHideFlags: 0
@@ -7448,6 +7517,7 @@ GameObject:
   - component: {fileID: 832796138}
   - component: {fileID: 832796137}
   - component: {fileID: 832796136}
+  - component: {fileID: 832796140}
   m_Layer: 5
   m_Name: ZonaBarra
   m_TagString: Untagged
@@ -7539,6 +7609,28 @@ RectTransform:
   m_AnchoredPosition: {x: -3.7413483, y: 3.704}
   m_SizeDelta: {x: 4414.6504, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &832796140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 832796135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d5dba7418420b948849f43c502d3cff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PanelSeguirCamara
+  camara: {fileID: 1659400441}
+  distancia: 1.5
+  offsetY: -0.1
+  seguirEjeY: 0
+  suavizadoPosicion: 2
+  umbralMovimiento: 0.25
+  distanciaMaxima: 4
+  suavizadoRotacion: 3
+  invertirFrente: 0
+  mostrarDebug: 1
 --- !u!1 &843094023
 GameObject:
   m_ObjectHideFlags: 0
@@ -13437,13 +13529,14 @@ GameObject:
   - component: {fileID: 1638114236}
   - component: {fileID: 1638114235}
   - component: {fileID: 1638114234}
+  - component: {fileID: 1638114238}
   m_Layer: 5
   m_Name: MenuZonas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1638114234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13528,6 +13621,28 @@ RectTransform:
   m_AnchoredPosition: {x: -3.5633469, y: 3.16}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1638114238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1638114233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d5dba7418420b948849f43c502d3cff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PanelSeguirCamara
+  camara: {fileID: 1659400441}
+  distancia: 1.5
+  offsetY: -0.1
+  seguirEjeY: 0
+  suavizadoPosicion: 2
+  umbralMovimiento: 0.25
+  distanciaMaxima: 4
+  suavizadoRotacion: 3
+  invertirFrente: 0
+  mostrarDebug: 1
 --- !u!1 &1643361863
 GameObject:
   m_ObjectHideFlags: 0
@@ -17440,6 +17555,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MenuInicioController
   menuInicio: {fileID: 543264846}
+  panelZonas: {fileID: 1638114233}
 --- !u!114 &2042553975
 MonoBehaviour:
   m_ObjectHideFlags: 0
