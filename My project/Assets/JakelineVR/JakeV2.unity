@@ -2149,7 +2149,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 192913311}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2158,7 +2158,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1593, y: -152}
+  m_AnchoredPosition: {x: 455, y: -152}
   m_SizeDelta: {x: 688.5, y: 254.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &192913313
@@ -3399,7 +3399,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1797, y: -152}
+  m_AnchoredPosition: {x: 656, y: -152}
   m_SizeDelta: {x: 688.5, y: 254.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &433342284
@@ -4851,14 +4851,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PanelSeguirCamara
   camara: {fileID: 1659400441}
+  manos:
+  - {fileID: 2096292757}
+  - {fileID: 385601281}
   distancia: 1.5
   offsetY: -0.1
   seguirEjeY: 0
-  suavizadoPosicion: 2
-  umbralMovimiento: 0.25
+  suavizadoPosicion: 2.72
+  anguloActivacion: 40
+  anguloReposo: 4
+  radioCongelar: 0.4
+  pointableCanvases:
+  - {fileID: 166181763}
+  - {fileID: 34346904}
+  - {fileID: 7787967}
+  - {fileID: 1300724791}
+  - {fileID: 132528228}
+  - {fileID: 1476538557}
+  buscarAutomaticamente: 1
+  tiempoCongeladoExtra: 2.25
   distanciaMaxima: 4
+  esperaEntreReubicaciones: 1
   suavizadoRotacion: 3
   invertirFrente: 0
+  desacoplarDelPadre: 0
+  reposicionarAlInicio: 0
+  bloqueado: 0
   mostrarDebug: 1
 --- !u!1 &547942977
 GameObject:
@@ -5076,7 +5094,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1096, y: -152}
+  m_AnchoredPosition: {x: -456, y: -48}
   m_SizeDelta: {x: 688.5, y: 254.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &580473151
@@ -5797,7 +5815,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 657076847}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 69.549515}
+  m_LocalPosition: {x: 0, y: 0, z: 69.5488}
   m_LocalScale: {x: 0.0005, y: 0.0005, z: 0.0005}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -5807,8 +5825,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -1.9013519, y: 3.374}
-  m_SizeDelta: {x: 4414.6504, y: 1080}
+  m_AnchoredPosition: {x: -1.9013519, y: 3.613}
+  m_SizeDelta: {x: 1663.5659, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &657076852
 MonoBehaviour:
@@ -5823,14 +5841,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PanelSeguirCamara
   camara: {fileID: 1659400441}
+  manos: []
   distancia: 1.5
   offsetY: -0.1
   seguirEjeY: 0
   suavizadoPosicion: 2
-  umbralMovimiento: 0.25
+  anguloActivacion: 40
+  anguloReposo: 4
+  radioCongelar: 0.4
+  pointableCanvases: []
+  buscarAutomaticamente: 1
+  tiempoCongeladoExtra: 1.5
   distanciaMaxima: 4
+  esperaEntreReubicaciones: 1
   suavizadoRotacion: 3
   invertirFrente: 0
+  desacoplarDelPadre: 1
+  reposicionarAlInicio: 0
+  bloqueado: 0
   mostrarDebug: 1
 --- !u!1 &660596891
 GameObject:
@@ -6443,7 +6471,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1763, y: -152}
+  m_AnchoredPosition: {x: -649, y: -152}
   m_SizeDelta: {x: 688.5, y: 254.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &718617767
@@ -7200,7 +7228,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 764454075}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 68.31352}
+  m_LocalPosition: {x: 0, y: 0, z: 68.2797}
   m_LocalScale: {x: 0.0005, y: 0.0005, z: 0.0005}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -7211,7 +7239,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: -2.337, y: 3.374}
-  m_SizeDelta: {x: 4414.6504, y: 1080}
+  m_SizeDelta: {x: 1610.5874, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &764454080
 MonoBehaviour:
@@ -7226,14 +7254,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PanelSeguirCamara
   camara: {fileID: 1659400441}
+  manos: []
   distancia: 1.5
   offsetY: -0.1
   seguirEjeY: 0
   suavizadoPosicion: 2
-  umbralMovimiento: 0.25
+  anguloActivacion: 40
+  anguloReposo: 4
+  radioCongelar: 0.4
+  pointableCanvases: []
+  buscarAutomaticamente: 1
+  tiempoCongeladoExtra: 1.5
   distanciaMaxima: 4
+  esperaEntreReubicaciones: 1
   suavizadoRotacion: 3
   invertirFrente: 0
+  desacoplarDelPadre: 1
+  reposicionarAlInicio: 0
+  bloqueado: 0
   mostrarDebug: 1
 --- !u!1 &805302305
 GameObject:
@@ -7606,8 +7644,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -3.7413483, y: 3.704}
-  m_SizeDelta: {x: 4414.6504, y: 1080}
+  m_AnchoredPosition: {x: -3.518, y: 3.814}
+  m_SizeDelta: {x: 2385.9277, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &832796140
 MonoBehaviour:
@@ -7622,14 +7660,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PanelSeguirCamara
   camara: {fileID: 1659400441}
+  manos: []
   distancia: 1.5
   offsetY: -0.1
   seguirEjeY: 0
   suavizadoPosicion: 2
-  umbralMovimiento: 0.25
+  anguloActivacion: 40
+  anguloReposo: 4
+  radioCongelar: 0.4
+  pointableCanvases: []
+  buscarAutomaticamente: 1
+  tiempoCongeladoExtra: 1.5
   distanciaMaxima: 4
+  esperaEntreReubicaciones: 1
   suavizadoRotacion: 3
   invertirFrente: 0
+  desacoplarDelPadre: 1
+  reposicionarAlInicio: 0
+  bloqueado: 0
   mostrarDebug: 1
 --- !u!1 &843094023
 GameObject:
@@ -8700,7 +8748,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1763, y: -152}
+  m_AnchoredPosition: {x: -460, y: -152}
   m_SizeDelta: {x: 688.5, y: 254.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &930270024
@@ -10834,7 +10882,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1259805254}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10843,7 +10891,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1353, y: -152}
+  m_AnchoredPosition: {x: -405, y: -152}
   m_SizeDelta: {x: 688.5, y: 254.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1259805256
@@ -11394,7 +11442,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _position: {x: 0, y: 0, z: 0}
-  _size: {x: 4414.6504, y: 1080, z: 0.01}
+  _size: {x: 1610.5874, y: 1080, z: 0.01}
 --- !u!114 &1338455690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11933,7 +11981,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _position: {x: 0, y: 0, z: 0}
-  _size: {x: 4414.6504, y: 1080, z: 0.01}
+  _size: {x: 1663.5659, y: 1080, z: 0.01}
 --- !u!114 &1411176938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12660,7 +12708,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _position: {x: 0, y: 0, z: 0}
-  _size: {x: 4414.6504, y: 1080, z: 0.01}
+  _size: {x: 2385.9277, y: 1080, z: 0.01}
 --- !u!114 &1507576411
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13634,14 +13682,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PanelSeguirCamara
   camara: {fileID: 1659400441}
+  manos: []
   distancia: 1.5
   offsetY: -0.1
   seguirEjeY: 0
   suavizadoPosicion: 2
-  umbralMovimiento: 0.25
+  anguloActivacion: 40
+  anguloReposo: 4
+  radioCongelar: 0.4
+  pointableCanvases: []
+  buscarAutomaticamente: 1
+  tiempoCongeladoExtra: 1.5
   distanciaMaxima: 4
+  esperaEntreReubicaciones: 1
   suavizadoRotacion: 3
   invertirFrente: 0
+  desacoplarDelPadre: 1
+  reposicionarAlInicio: 0
+  bloqueado: 0
   mostrarDebug: 1
 --- !u!1 &1643361863
 GameObject:
@@ -16208,7 +16266,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1249, y: -152}
+  m_AnchoredPosition: {x: 486, y: -51}
   m_SizeDelta: {x: 688.5, y: 254.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1915380294
@@ -17820,8 +17878,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -5.420349, y: 3.528}
-  m_SizeDelta: {x: 4414.6504, y: 1080}
+  m_AnchoredPosition: {x: -5.2013, y: 3.528}
+  m_SizeDelta: {x: 1638.0122, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2058253451
 GameObject:
@@ -18397,7 +18455,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _position: {x: 0, y: 0, z: 0}
-  _size: {x: 4414.6504, y: 1080, z: 0.01}
+  _size: {x: 1638.0122, y: 1080, z: 0.01}
 --- !u!114 &2089798584
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18463,7 +18521,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1797, y: -152}
+  m_AnchoredPosition: {x: 462, y: -152}
   m_SizeDelta: {x: 688.5, y: 254.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2095846811
