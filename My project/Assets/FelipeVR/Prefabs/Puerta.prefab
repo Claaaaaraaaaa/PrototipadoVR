@@ -409,11 +409,11 @@ Transform:
   m_GameObject: {fileID: 6061785905552437919}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.5196161}
-  m_LocalScale: {x: 1.0082929, y: 1.0082928, z: 1.0082929}
+  m_LocalPosition: {x: 0.39299884, y: -0.0029998869, z: 0}
+  m_LocalScale: {x: 0.09999999, y: 0.043649994, z: 2.4601}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4007773154886791316}
+  m_Father: {fileID: 6836019855901435589}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4788036315675312050
 MeshFilter:
@@ -541,7 +541,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Meta.XR.BuildingBlocks::Meta.XR.BuildingBlocks.BuildingBlock
   blockId: 5838e892-31a4-4f65-a415-dc108aefa14c
-  instanceId: 1ac373c6-12a2-4419-a800-9b4028c6d644
+  instanceId: 69b0ad47-4c9b-41df-bf35-cd6b25eb8eb1
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: c88fc9f2-e9d1-41ea-b937-cdaf92a806d0
@@ -726,6 +726,7 @@ Transform:
   m_LocalScale: {x: 0.22219712, y: 0.51145005, z: 0.010483758}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 5797695750965451803}
   - {fileID: 7102353721034402612}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -870,7 +871,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5797695750965451803}
   - {fileID: 670100289096089870}
   m_Father: {fileID: 5624522805402797939}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

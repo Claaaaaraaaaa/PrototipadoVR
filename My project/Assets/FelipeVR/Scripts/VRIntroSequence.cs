@@ -3,49 +3,43 @@ using UnityEngine;
 
 public class VRIntroSequence : MonoBehaviour
 {
-    [Header("Referencias XR")]
-    [Tooltip("El objeto [BuildingBlock] Camera Rig")]
-    [SerializeField] private Transform xrOrigin;
-
     [Header("Pantalla Negra (Fade Screen)")]
     [Tooltip("CanvasGroup del FadeCanvas ubicado en CenterEyeAnchor")]
     [SerializeField] private CanvasGroup blackScreenCanvasGroup;
 
-    [Tooltip("Distancia súper cercana para el arranque sin atravesar el suelo")]
-    [SerializeField] private float closeDistance = 0.15f;
-
-    [Tooltip("Distancia normal del panel detrás del logo durante la animación")]
-    [SerializeField] private float normalDistance = 1.0f;
-
     [Header("Configuración del Logo")]
     [SerializeField] private GameObject logoPanel;
     [SerializeField] private CanvasGroup logoCanvasGroup;
-    [SerializeField] private float logoFadeInDuration = 1.0f;
-    [SerializeField] private float logoHoldDuration = 0.5f;
 
-    [Header("Configuración de Descenso")]
-    [SerializeField] private float startHeight = 5.0f;
-    [SerializeField] private float descentDuration = 6.0f;
+    [Header("Tiempos de la Secuencia")]
+    [Tooltip("Tiempo en oscuridad total al inicio (ej. 1.5s)")]
+    [SerializeField] private float initialDarkDuration = 1.5f;
 
-    private Vector3 groundPosition;
-    private Vector3 elevatedPosition;
+    [Tooltip("Aparición rápida del logo (0.5s)")]
+    [SerializeField] private float logoFadeInDuration = 0.5f;
+
+    [Tooltip("Tiempo observando el logo con el fondo negro (2 segundos)")]
+    [SerializeField] private float logoHoldDuration = 2.0f;
+
+    [Tooltip("Duración del desvanecimiento final")]
+    [SerializeField] private float fadeOutDuration = 1.5f;
 
     private void Awake()
     {
-        // 1. Iniciar en total oscuridad
+        // 1. Ocultar el logo antes del primer renderizado
+        if (logoPanel != null) logoPanel.SetActive(false);
+        if (logoCanvasGroup != null) logoCanvasGroup.alpha = 0f;
+
+        // 2. Encender pantalla negra pegada al visor
         if (blackScreenCanvasGroup != null)
         {
-            blackScreenCanvasGroup.alpha = 1f;
             blackScreenCanvasGroup.gameObject.SetActive(true);
+            blackScreenCanvasGroup.alpha = 1f;
 
-            // Pegar la pantalla negra pegada a los ojos (Z = 0.15m) para evitar que toque el suelo
-            Vector3 localPos = blackScreenCanvasGroup.transform.localPosition;
-            blackScreenCanvasGroup.transform.localPosition = new Vector3(localPos.x, localPos.y, closeDistance);
-        }
-
-        if (logoCanvasGroup != null)
-        {
-            logoCanvasGroup.alpha = 0f;
+            Transform t = blackScreenCanvasGroup.transform;
+            t.localPosition = new Vector3(0f, 0f, 0.25f);
+            t.localRotation = Quaternion.identity;
+            t.localScale = new Vector3(2f, 2f, 1f);
         }
     }
 
@@ -56,27 +50,17 @@ public class VRIntroSequence : MonoBehaviour
 
     private IEnumerator PlayIntroSequence()
     {
-        // 2. Espera técnica en oscuridad pegada a la cara para que el SDK de Meta estabilice el tracking
-        yield return new WaitForSeconds(0.4f);
+        // FASE 1: Oscuridad total estática
+        yield return new WaitForSeconds(initialDarkDuration);
 
-        // Elevar la cámara en penumbra
-        if (xrOrigin != null)
+        // FASE 2: Aparición rápida del logo
+        if (logoPanel != null)
         {
-            groundPosition = xrOrigin.position;
-            elevatedPosition = groundPosition + Vector3.up * startHeight;
-            xrOrigin.position = elevatedPosition;
+            logoPanel.SetActive(true);
+            LazyFollowUI lazyFollow = logoPanel.GetComponent<LazyFollowUI>();
+            if (lazyFollow != null) lazyFollow.SnapToCameraFront();
         }
 
-        // 3. Ya en la altura, alejar la pantalla negra a su distancia normal (Z = 1.0m) detrás del logo
-        if (blackScreenCanvasGroup != null)
-        {
-            Vector3 localPos = blackScreenCanvasGroup.transform.localPosition;
-            blackScreenCanvasGroup.transform.localPosition = new Vector3(localPos.x, localPos.y, normalDistance);
-        }
-
-        if (logoPanel != null) logoPanel.SetActive(true);
-
-        // 4. Aparecer el logo suavemente frente a la pantalla negra
         float elapsed = 0f;
         while (elapsed < logoFadeInDuration)
         {
@@ -90,56 +74,33 @@ public class VRIntroSequence : MonoBehaviour
         }
         if (logoCanvasGroup != null) logoCanvasGroup.alpha = 1f;
 
-        // Pausa breve para observar el logo
-        if (logoHoldDuration > 0)
-        {
-            yield return new WaitForSeconds(logoHoldDuration);
-        }
+        // FASE 3: Mantener logo visible en la oscuridad
+        yield return new WaitForSeconds(logoHoldDuration);
 
-        // 5. Descenso de la cámara + Desvanecimiento en paralelo del mapa y del logo
+        // FASE 4: Desvanecer fondo oscuro y logo al mismo tiempo
         elapsed = 0f;
-        while (elapsed < descentDuration)
+        while (elapsed < fadeOutDuration)
         {
             elapsed += Time.deltaTime;
-            float t = Mathf.Clamp01(elapsed / descentDuration);
+            float t = Mathf.Clamp01(elapsed / fadeOutDuration);
 
-            // Transición S doble para evitar vértigo
-            float smoothT = Mathf.SmoothStep(0f, 1f, t);
-            smoothT = Mathf.SmoothStep(0f, 1f, smoothT);
-
-            // Bajar la cámara paulatinamente
-            if (xrOrigin != null)
-            {
-                xrOrigin.position = Vector3.Lerp(elevatedPosition, groundPosition, smoothT);
-            }
-
-            // Desvanecer el fondo negro revelando el escenario
             if (blackScreenCanvasGroup != null)
             {
-                blackScreenCanvasGroup.alpha = Mathf.Lerp(1f, 0f, smoothT);
+                blackScreenCanvasGroup.alpha = Mathf.Lerp(1f, 0f, t);
             }
-
-            // Desvanecer el logo al mismo tiempo
             if (logoCanvasGroup != null)
             {
-                logoCanvasGroup.alpha = Mathf.Lerp(1f, 0f, smoothT);
+                logoCanvasGroup.alpha = Mathf.Lerp(1f, 0f, t);
             }
-
             yield return null;
         }
 
-        // 6. Finalización en el suelo
-        if (xrOrigin != null) xrOrigin.position = groundPosition;
-
+        // Estado final: Se deshabilitan las UIs y empieza el juego normalmente
         if (blackScreenCanvasGroup != null)
         {
             blackScreenCanvasGroup.alpha = 0f;
             blackScreenCanvasGroup.gameObject.SetActive(false);
         }
-
-        if (logoPanel != null)
-        {
-            logoPanel.SetActive(false);
-        }
+        if (logoPanel != null) logoPanel.SetActive(false);
     }
 }
