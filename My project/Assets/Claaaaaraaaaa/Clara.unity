@@ -2621,6 +2621,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -4683669308469848369, guid: 54804352d83caa34489c92ab32d351ee, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 0ead6d453606243439b6dd898d5a071e, type: 2}
     - target: {fileID: 919132149155446097, guid: 54804352d83caa34489c92ab32d351ee, type: 3}
       propertyPath: m_Name
       value: muebleplatos
@@ -4018,6 +4022,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7918335002988649766, guid: 397067bb77eccb745827cc33040829cc, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 93f86e4270475694ab5d0e3d7142b864, type: 2}
     - target: {fileID: -4683669308469848369, guid: 397067bb77eccb745827cc33040829cc, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
