@@ -1,4 +1,3 @@
-
 using UnityEngine;
 
 public class DetectorOlla : MonoBehaviour
@@ -7,21 +6,34 @@ public class DetectorOlla : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        IngredientePicable ingrediente =
-            other.GetComponentInParent<IngredientePicable>();
-
-        if (ingrediente == null)
-            ingrediente = other.GetComponentInChildren<IngredientePicable>();
-
-        if (ingrediente == null || !ingrediente.YaPicado)
-            return;
-
         if (puntoDestinoIngredientes == null)
         {
             Debug.LogError("Falta asignar PuntoDestinoIngredientes.");
             return;
         }
 
-        ingrediente.IncorporarAlaOlla(puntoDestinoIngredientes);
+        // BLOQUE 1: Tu código original para Ingredientes Picados (INTACTO)
+        IngredientePicable ingredientePicable = other.GetComponentInParent<IngredientePicable>();
+        if (ingredientePicable == null)
+            ingredientePicable = other.GetComponentInChildren<IngredientePicable>();
+
+        if (ingredientePicable != null)
+        {
+            if (ingredientePicable.YaPicado)
+            {
+                ingredientePicable.IncorporarAlaOlla(puntoDestinoIngredientes);
+            }
+            return;
+        }
+
+        // BLOQUE 2: Lógica para Ingredientes Enteros
+        IngredienteEntero ingredienteEntero = other.GetComponentInParent<IngredienteEntero>();
+        if (ingredienteEntero == null)
+            ingredienteEntero = other.GetComponentInChildren<IngredienteEntero>();
+
+        if (ingredienteEntero != null)
+        {
+            ingredienteEntero.IncorporarAlaOlla(puntoDestinoIngredientes);
+        }
     }
 }
