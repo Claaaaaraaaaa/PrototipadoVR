@@ -9,6 +9,7 @@ public class ControlFogon : MonoBehaviour
     public void AlternarFogon()
     {
         encendido = !encendido;
+        if (encendido) RecetaEventos.Notificar(RecetaEventos.EstufaEncendida);
         Debug.Log("Fogón encendido: " + encendido);
 
         if (efectoFogon != null)

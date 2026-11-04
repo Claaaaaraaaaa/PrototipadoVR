@@ -47,6 +47,7 @@ public class IngredientePicable : MonoBehaviour
             return;
 
         dentroDeOlla = true;
+        RecetaEventos.Notificar(RecetaEventos.IngredienteEnOlla);
 
         // Desactivar el agarre
         foreach (MonoBehaviour componente in GetComponentsInChildren<MonoBehaviour>(true))
