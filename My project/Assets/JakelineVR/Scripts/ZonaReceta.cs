@@ -4,9 +4,8 @@ using UnityEngine.Events;
 using Oculus.Interaction;
 
 /// <summary>
-/// Detector de receta. Ponlo en un objeto con un Collider marcado como "Is Trigger"
-/// (por ejemplo un hijo de la snap zone). Cuando la olla queda dentro y suelta,
-/// hace la accion elegida.
+/// Detector de receta. Ponlo en un objeto con un Collider marcado como "Is Trigger".
+/// Cuando la olla queda dentro (y suelta), hace la accion elegida.
 /// </summary>
 [RequireComponent(typeof(Collider))]
 public class ZonaReceta : MonoBehaviour
@@ -18,13 +17,13 @@ public class ZonaReceta : MonoBehaviour
         NotificarPaso   // completa un paso de la receta
     }
 
-    public Accion accion = Accion.Ninguna;
+    public Accion accion = Accion.LlenarOlla;
 
     [Tooltip("Segundos que la olla tiene que estar dentro (y suelta) para que cuente")]
     public float segundosDentro = 2f;
 
-    [Tooltip("Solo cuenta si el usuario ya solto la olla (no si pasa por aqui en la mano)")]
-    public bool soloSiEstaSuelta = true;
+    [Tooltip("Solo cuenta si el usuario ya solto la olla. Desactivalo si el snap deja la olla 'agarrada'.")]
+    public bool soloSiEstaSuelta = false;
 
     [Header("Notificar paso")]
     [Tooltip("Id del paso: olla_con_agua, estufa_encendida, plato_en_mesa...")]
@@ -39,14 +38,13 @@ public class ZonaReceta : MonoBehaviour
 
     public bool mostrarDebug = true;
 
-    // Una olla puede tener varios colliders: se cuentan para saber cuando sale del todo
     readonly Dictionary<OllaEstado, int> collidersDentro = new Dictionary<OllaEstado, int>();
 
     OllaEstado ollaDentro;
     Grabbable agarreOlla;
     float tiempoQuieta;
     bool hechoEstaVez;
-    bool avisoSinAgua;
+    string ultimoMotivo;
 
     void Reset()
     {
@@ -61,6 +59,9 @@ public class ZonaReceta : MonoBehaviour
             Debug.LogWarning("[ZonaReceta] " + name + ": el Collider no es Trigger. Lo activo.", this);
             c.isTrigger = true;
         }
+
+        if (mostrarDebug)
+            Debug.Log("[ZonaReceta] " + name + " listo. Accion = " + accion, this);
     }
 
     void OnTriggerEnter(Collider other)
@@ -77,9 +78,9 @@ public class ZonaReceta : MonoBehaviour
             agarreOlla = olla.GetComponentInChildren<Grabbable>();
             tiempoQuieta = 0f;
             hechoEstaVez = false;
-            avisoSinAgua = false;
+            ultimoMotivo = null;
 
-            if (mostrarDebug) Debug.Log("[ZonaReceta] " + name + ": entro " + olla.name, this);
+            Log("entro " + olla.name + " (accion: " + accion + ", espera " + segundosDentro + " s)");
             alColocar.Invoke();
         }
     }
@@ -96,7 +97,7 @@ public class ZonaReceta : MonoBehaviour
 
         if (olla == ollaDentro)
         {
-            if (mostrarDebug) Debug.Log("[ZonaReceta] " + name + ": salio " + olla.name, this);
+            Log("salio " + olla.name);
             ollaDentro = null;
             agarreOlla = null;
             alQuitar.Invoke();
@@ -107,24 +108,28 @@ public class ZonaReceta : MonoBehaviour
     {
         if (ollaDentro == null || hechoEstaVez) return;
 
-        // Si la olla se desactivo estando dentro, olvidarla
         if (!ollaDentro.isActiveAndEnabled)
         {
+            Log("la olla se desactivo estando dentro");
             collidersDentro.Remove(ollaDentro);
             ollaDentro = null;
             return;
         }
 
-        // Mientras la tengan en la mano no cuenta el tiempo
         bool enLaMano = agarreOlla != null && agarreOlla.SelectingPointsCount > 0;
         if (soloSiEstaSuelta && enLaMano)
         {
             tiempoQuieta = 0f;
+            Esperando("la olla sigue agarrada (si ya la soltaste, desactiva 'Solo Si Esta Suelta')");
             return;
         }
 
         tiempoQuieta += Time.deltaTime;
-        if (tiempoQuieta < segundosDentro) return;
+        if (tiempoQuieta < segundosDentro)
+        {
+            Esperando("contando " + segundosDentro + " s...");
+            return;
+        }
 
         Ejecutar();
     }
@@ -134,29 +139,47 @@ public class ZonaReceta : MonoBehaviour
         switch (accion)
         {
             case Accion.LlenarOlla:
-                ollaDentro.Llenar();
-                hechoEstaVez = true;
-                alCompletar.Invoke();
+                if (ollaDentro.TieneAgua)
+                    Log("la olla ya tenia agua");
+                else
+                    ollaDentro.Llenar();
+                Completar();
                 break;
 
             case Accion.NotificarPaso:
                 if (requiereOllaConAgua && !ollaDentro.TieneAgua)
                 {
-                    if (mostrarDebug && !avisoSinAgua)
-                        Debug.Log("[ZonaReceta] " + name + ": la olla no tiene agua, no cuenta.", this);
-                    avisoSinAgua = true;
+                    Esperando("la olla no tiene agua, no cuenta");
                     return; // sigue esperando por si se llena
                 }
                 RecetaEventos.Notificar(idAccion);
-                hechoEstaVez = true;
-                alCompletar.Invoke();
-                if (mostrarDebug) Debug.Log("[ZonaReceta] " + name + ": notificado " + idAccion, this);
+                Log("notificado " + idAccion);
+                Completar();
                 break;
 
             case Accion.Ninguna:
-                hechoEstaVez = true;
-                alCompletar.Invoke();
+                Log("Accion = Ninguna, no hago nada (cambiala en el Inspector)");
+                Completar();
                 break;
         }
+    }
+
+    void Completar()
+    {
+        hechoEstaVez = true;
+        alCompletar.Invoke();
+    }
+
+    void Esperando(string motivo)
+    {
+        if (motivo == ultimoMotivo) return;
+        ultimoMotivo = motivo;
+        Log("esperando: " + motivo);
+    }
+
+    void Log(string msg)
+    {
+        if (mostrarDebug)
+            Debug.Log("[ZonaReceta] " + name + ": " + msg, this);
     }
 }

@@ -2797,6 +2797,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::IngredientePicable
   modeloEntero: {fileID: 407356360}
   modeloPicado: {fileID: 1411709770}
+  cortesNecesarios: 1
+  tiempoEntreCortes: 0.3
+  alCortar:
+    m_PersistentCalls:
+      m_Calls: []
+  alPicarse:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &264051491
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3940,6 +3948,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 605988722}
+  - {fileID: 1226512768}
   - {fileID: 983899142}
   m_Father: {fileID: 1515510404}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4023,8 +4032,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83146c0c33f95e946b3067e51e9f0f6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OllaEstado
-  visualVacia: []
-  visualAgua: {fileID: 919132149155446097, guid: 091056d05c45422489c2009c6ba92855, type: 3}
+  visualVacia:
+  - {fileID: 1960913617}
+  - {fileID: 1960913616}
+  - {fileID: 1960913615}
+  visualAgua: {fileID: 1226512767}
   visualRondon: {fileID: 0}
   alLlenarse:
     m_PersistentCalls:
@@ -4035,6 +4047,7 @@ MonoBehaviour:
   alVaciarse:
     m_PersistentCalls:
       m_Calls: []
+  mostrarDebug: 1
 --- !u!1 &340320206
 GameObject:
   m_ObjectHideFlags: 0
@@ -5895,6 +5908,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::IngredientePicable
   modeloEntero: {fileID: 2082127406}
   modeloPicado: {fileID: 681224551}
+  cortesNecesarios: 1
+  tiempoEntreCortes: 0.3
+  alCortar:
+    m_PersistentCalls:
+      m_Calls: []
+  alPicarse:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &426057922
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6437,6 +6458,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::IngredientePicable
   modeloEntero: {fileID: 237476215}
   modeloPicado: {fileID: 886783034}
+  cortesNecesarios: 1
+  tiempoEntreCortes: 0.3
+  alCortar:
+    m_PersistentCalls:
+      m_Calls: []
+  alPicarse:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &461134537
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7585,6 +7614,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::IngredientePicable
   modeloEntero: {fileID: 2045280608}
   modeloPicado: {fileID: 1417519368}
+  cortesNecesarios: 1
+  tiempoEntreCortes: 0.3
+  alCortar:
+    m_PersistentCalls:
+      m_Calls: []
+  alPicarse:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &538647515
 GameObject:
   m_ObjectHideFlags: 0
@@ -10705,6 +10742,7 @@ GameObject:
   - component: {fileID: 698127172}
   - component: {fileID: 698127170}
   - component: {fileID: 698127171}
+  - component: {fileID: 698127174}
   m_Layer: 0
   m_Name: SnapDetectionOlla (1)
   m_TagString: Untagged
@@ -10768,7 +10806,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -10789,6 +10827,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 774935042}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &698127174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 698127169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83e18dafd599dbe4ca312190477f4216, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ZonaReceta
+  accion: 2
+  segundosDentro: 2
+  soloSiEstaSuelta: 0
+  idAccion: olla_con_agua
+  requiereOllaConAgua: 1
+  alColocar:
+    m_PersistentCalls:
+      m_Calls: []
+  alQuitar:
+    m_PersistentCalls:
+      m_Calls: []
+  alCompletar:
+    m_PersistentCalls:
+      m_Calls: []
+  mostrarDebug: 1
 --- !u!1001 &699115284
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11649,6 +11714,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::IngredientePicable
   modeloEntero: {fileID: 1362143347}
   modeloPicado: {fileID: 1052130162}
+  cortesNecesarios: 1
+  tiempoEntreCortes: 0.3
+  alCortar:
+    m_PersistentCalls:
+      m_Calls: []
+  alPicarse:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &774276940
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13982,6 +14055,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DetectorOlla
   puntoDestinoIngredientes: {fileID: 523571239}
+  soloSiTieneAgua: 1
+  mostrarDebug: 1
 --- !u!1 &906513142
 GameObject:
   m_ObjectHideFlags: 0
@@ -14554,6 +14629,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::IngredientePicable
   modeloEntero: {fileID: 71021535}
   modeloPicado: {fileID: 1337510790}
+  cortesNecesarios: 1
+  tiempoEntreCortes: 0.3
+  alCortar:
+    m_PersistentCalls:
+      m_Calls: []
+  alPicarse:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &968969887
 GameObject:
   m_ObjectHideFlags: 0
@@ -15182,6 +15265,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::IngredientePicable
   modeloEntero: {fileID: 1724944477}
   modeloPicado: {fileID: 175853750}
+  cortesNecesarios: 1
+  tiempoEntreCortes: 0.3
+  alCortar:
+    m_PersistentCalls:
+      m_Calls: []
+  alPicarse:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &996900394
 GameObject:
   m_ObjectHideFlags: 0
@@ -15540,6 +15631,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::IngredientePicable
   modeloEntero: {fileID: 533335529}
   modeloPicado: {fileID: 1080009497}
+  cortesNecesarios: 1
+  tiempoEntreCortes: 0.3
+  alCortar:
+    m_PersistentCalls:
+      m_Calls: []
+  alPicarse:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1006346426
 GameObject:
   m_ObjectHideFlags: 0
@@ -19144,6 +19243,16 @@ MonoBehaviour:
   _defaultInteractable: {fileID: 0}
   _timeOutInteractable: {fileID: 0}
   _timeOut: 0
+--- !u!1 &1226512767 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 9ab639cfb3693c944b5cc82f1b1dbdbf, type: 3}
+  m_PrefabInstance: {fileID: 1292567808}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1226512768 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9ab639cfb3693c944b5cc82f1b1dbdbf, type: 3}
+  m_PrefabInstance: {fileID: 1292567808}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1227760950
 GameObject:
   m_ObjectHideFlags: 0
@@ -19702,7 +19811,7 @@ Transform:
   m_GameObject: {fileID: 1238485123}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.0024078786, z: -0, w: 0.99999714}
-  m_LocalPosition: {x: -0.58, y: -1, z: -5.28}
+  m_LocalPosition: {x: -0.58, y: -1, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -20231,6 +20340,79 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1287953292}
   m_CullTransparentMesh: 1
+--- !u!1001 &1292567808
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 329070581}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 9ab639cfb3693c944b5cc82f1b1dbdbf, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9ab639cfb3693c944b5cc82f1b1dbdbf, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.9
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9ab639cfb3693c944b5cc82f1b1dbdbf, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9ab639cfb3693c944b5cc82f1b1dbdbf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 280.964
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9ab639cfb3693c944b5cc82f1b1dbdbf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 27.63
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9ab639cfb3693c944b5cc82f1b1dbdbf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1622.816
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9ab639cfb3693c944b5cc82f1b1dbdbf, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.96479475
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9ab639cfb3693c944b5cc82f1b1dbdbf, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9ab639cfb3693c944b5cc82f1b1dbdbf, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.26300406
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9ab639cfb3693c944b5cc82f1b1dbdbf, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9ab639cfb3693c944b5cc82f1b1dbdbf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9ab639cfb3693c944b5cc82f1b1dbdbf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 30.497
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9ab639cfb3693c944b5cc82f1b1dbdbf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9ab639cfb3693c944b5cc82f1b1dbdbf, type: 3}
+      propertyPath: m_Name
+      value: OLLAagua
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9ab639cfb3693c944b5cc82f1b1dbdbf, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9ab639cfb3693c944b5cc82f1b1dbdbf, type: 3}
 --- !u!1 &1299052930
 GameObject:
   m_ObjectHideFlags: 0
@@ -23051,6 +23233,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::IngredientePicable
   modeloEntero: {fileID: 1498067402}
   modeloPicado: {fileID: 1782871246}
+  cortesNecesarios: 1
+  tiempoEntreCortes: 0.3
+  alCortar:
+    m_PersistentCalls:
+      m_Calls: []
+  alPicarse:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1432315308 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 153c5ae02ee809144bde64edb6dad514, type: 3}
@@ -23869,6 +24059,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DetectorOlla
   puntoDestinoIngredientes: {fileID: 367222480}
+  soloSiTieneAgua: 1
+  mostrarDebug: 1
 --- !u!1 &1479317178
 GameObject:
   m_ObjectHideFlags: 0
@@ -25032,6 +25224,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::IngredientePicable
   modeloEntero: {fileID: 1898521331}
   modeloPicado: {fileID: 783108091}
+  cortesNecesarios: 1
+  tiempoEntreCortes: 0.3
+  alCortar:
+    m_PersistentCalls:
+      m_Calls: []
+  alPicarse:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1539833266
 GameObject:
   m_ObjectHideFlags: 0
@@ -26915,6 +27115,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::IngredientePicable
   modeloEntero: {fileID: 1223938342}
   modeloPicado: {fileID: 826306765}
+  cortesNecesarios: 1
+  tiempoEntreCortes: 0.3
+  alCortar:
+    m_PersistentCalls:
+      m_Calls: []
+  alPicarse:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1692794027
 GameObject:
   m_ObjectHideFlags: 0
@@ -28635,6 +28843,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::IngredientePicable
   modeloEntero: {fileID: 1542234396}
   modeloPicado: {fileID: 353126897}
+  cortesNecesarios: 1
+  tiempoEntreCortes: 0.3
+  alCortar:
+    m_PersistentCalls:
+      m_Calls: []
+  alPicarse:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1782871246
 GameObject:
   m_ObjectHideFlags: 0
@@ -30226,6 +30442,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::IngredientePicable
   modeloEntero: {fileID: 363553832}
   modeloPicado: {fileID: 1357195879}
+  cortesNecesarios: 1
+  tiempoEntreCortes: 0.3
+  alCortar:
+    m_PersistentCalls:
+      m_Calls: []
+  alPicarse:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1905100315
 GameObject:
   m_ObjectHideFlags: 0
@@ -30407,6 +30631,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::IngredientePicable
   modeloEntero: {fileID: 1432315308}
   modeloPicado: {fileID: 1022095665}
+  cortesNecesarios: 1
+  tiempoEntreCortes: 0.3
+  alCortar:
+    m_PersistentCalls:
+      m_Calls: []
+  alPicarse:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &1921542604
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31742,6 +31974,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::IngredientePicable
   modeloEntero: {fileID: 426057924}
   modeloPicado: {fileID: 289015364}
+  cortesNecesarios: 1
+  tiempoEntreCortes: 0.3
+  alCortar:
+    m_PersistentCalls:
+      m_Calls: []
+  alPicarse:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1975453528
 GameObject:
   m_ObjectHideFlags: 0
@@ -34411,9 +34651,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83e18dafd599dbe4ca312190477f4216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ZonaReceta
-  accion: 0
+  accion: 1
   segundosDentro: 2
-  soloSiEstaSuelta: 1
+  soloSiEstaSuelta: 0
   idAccion: olla_con_agua
   requiereOllaConAgua: 1
   alColocar:

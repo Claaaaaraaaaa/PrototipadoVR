@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class IngredientePicable : MonoBehaviour
 {
@@ -7,11 +8,26 @@ public class IngredientePicable : MonoBehaviour
     [SerializeField] private GameObject modeloEntero;
     [SerializeField] private GameObject modeloPicado;
 
+    [Header("Picado")]
+    [Tooltip("Cuantos cortes hacen falta para picarlo")]
+    [Min(1)][SerializeField] private int cortesNecesarios = 1;
+    [Tooltip("Tiempo minimo entre cortes, para que un solo pase del cuchillo no cuente varias veces")]
+    [SerializeField] private float tiempoEntreCortes = 0.3f;
+
+    [Header("Eventos (opcional: sonido, particulas...)")]
+    public UnityEvent alCortar;
+    public UnityEvent alPicarse;
+
     private bool yaPicado = false;
     private bool dentroDeOlla = false;
+    private int cortes = 0;
+    private float ultimoCorte = -99f;
 
     public bool YaPicado => yaPicado;
     public bool DentroDeOlla => dentroDeOlla;
+
+    /// <summary>True si ya esta picado y todavia no esta en la olla.</summary>
+    public bool ListoParaOlla => yaPicado && !dentroDeOlla;
 
     private void Start()
     {
@@ -27,9 +43,22 @@ public class IngredientePicable : MonoBehaviour
         if (yaPicado || dentroDeOlla)
             return;
 
+        if (Time.time - ultimoCorte < tiempoEntreCortes)
+            return;
+        ultimoCorte = Time.time;
+
         if (modeloEntero == null || modeloPicado == null)
         {
-            Debug.LogWarning("Asigna los modelos entero y picado en " + gameObject.name);
+            Debug.LogWarning("Asigna los modelos entero y picado en " + gameObject.name, this);
+            return;
+        }
+
+        cortes++;
+        alCortar.Invoke();
+
+        if (cortes < cortesNecesarios)
+        {
+            Debug.Log("Corte " + cortes + "/" + cortesNecesarios + " en " + gameObject.name, this);
             return;
         }
 
@@ -38,16 +67,20 @@ public class IngredientePicable : MonoBehaviour
         modeloEntero.SetActive(false);
         modeloPicado.SetActive(true);
 
-        Debug.Log("Ingrediente picado: " + gameObject.name);
+        alPicarse.Invoke();
+        Debug.Log("Ingrediente picado: " + gameObject.name, this);
     }
 
-    public void IncorporarAlaOlla(Transform puntoDestino)
+    /// <summary>
+    /// Mete el ingrediente en la olla. Devuelve true si entro.
+    /// La notificacion a la receta la hace DetectorOlla.
+    /// </summary>
+    public bool IncorporarAlaOlla(Transform puntoDestino)
     {
-        if (!yaPicado || dentroDeOlla || puntoDestino == null)
-            return;
+        if (!ListoParaOlla || puntoDestino == null)
+            return false;
 
         dentroDeOlla = true;
-        RecetaEventos.Notificar(RecetaEventos.IngredienteEnOlla);
 
         // Desactivar el agarre
         foreach (MonoBehaviour componente in GetComponentsInChildren<MonoBehaviour>(true))
@@ -68,6 +101,7 @@ public class IngredientePicable : MonoBehaviour
             col.enabled = false;
 
         StartCoroutine(ColocarEnOlla(puntoDestino));
+        return true;
     }
 
     private IEnumerator ColocarEnOlla(Transform puntoDestino)
@@ -75,7 +109,7 @@ public class IngredientePicable : MonoBehaviour
         // Esperar un frame para que el sistema de agarre termine de mover el objeto
         yield return null;
 
-        // Buscar el Rigidbody también en los padres
+        // Buscar el Rigidbody tambien en los padres
         Rigidbody rb = GetComponentInParent<Rigidbody>();
         if (rb == null) rb = GetComponentInChildren<Rigidbody>();
 
@@ -126,6 +160,6 @@ public class IngredientePicable : MonoBehaviour
         }
 
         Physics.SyncTransforms();
-        Debug.Log("Ingrediente colocado dentro de la olla.");
+        Debug.Log("Ingrediente colocado dentro de la olla: " + gameObject.name, this);
     }
 }

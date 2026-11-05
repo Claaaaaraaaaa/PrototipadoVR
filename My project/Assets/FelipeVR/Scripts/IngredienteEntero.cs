@@ -6,10 +6,14 @@ public class IngredienteEntero : MonoBehaviour
     private bool dentroDeOlla = false;
     public bool DentroDeOlla => dentroDeOlla;
 
-    public void IncorporarAlaOlla(Transform puntoDestino)
+    /// <summary>
+    /// Mete el ingrediente en la olla. Devuelve true si entro.
+    /// La notificacion a la receta la hace DetectorOlla.
+    /// </summary>
+    public bool IncorporarAlaOlla(Transform puntoDestino)
     {
         if (dentroDeOlla || puntoDestino == null)
-            return;
+            return false;
 
         dentroDeOlla = true;
 
@@ -32,6 +36,7 @@ public class IngredienteEntero : MonoBehaviour
             col.enabled = false;
 
         StartCoroutine(ColocarEnOlla(puntoDestino));
+        return true;
     }
 
     private IEnumerator ColocarEnOlla(Transform puntoDestino)
@@ -82,5 +87,6 @@ public class IngredienteEntero : MonoBehaviour
         }
 
         Physics.SyncTransforms();
+        Debug.Log("Ingrediente entero colocado dentro de la olla: " + gameObject.name, this);
     }
 }
