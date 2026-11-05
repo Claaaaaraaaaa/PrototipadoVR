@@ -383,7 +383,7 @@ public class RecetaManager : MonoBehaviour
                 new SubPasoReceta("Chile panameño", RecetaEventos.EnOlla("chile"))),
 
             // 4 a 9
-            new PasoReceta("Echar la leche de coco",                  RecetaEventos.LecheCocoEnOlla),
+            new PasoReceta("Echar la leche de coco", RecetaEventos.EnOlla("leche_coco")),
             new PasoReceta("Llevar la olla a la estufa y encenderla", RecetaEventos.EstufaEncendida),
             new PasoReceta("Tomar el plato y servir desde la olla",   RecetaEventos.PlatoServido),
             new PasoReceta("Llevar el plato a la mesa",               RecetaEventos.PlatoEnMesa),
