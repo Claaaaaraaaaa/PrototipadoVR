@@ -1,4 +1,3 @@
-
 using UnityEngine;
 
 public class NavegacionRecetario : MonoBehaviour
@@ -8,7 +7,8 @@ public class NavegacionRecetario : MonoBehaviour
 
     private bool segundaPagina = false;
 
-    private void Start()
+    // OnEnable en vez de Start: se ejecuta cada vez que se abre el libro
+    private void OnEnable()
     {
         MostrarPagina1();
     }
@@ -21,7 +21,7 @@ public class NavegacionRecetario : MonoBehaviour
         pagina2.SetActive(segundaPagina);
     }
 
-    private void MostrarPagina1()
+    public void MostrarPagina1()
     {
         segundaPagina = false;
         pagina1.SetActive(true);
