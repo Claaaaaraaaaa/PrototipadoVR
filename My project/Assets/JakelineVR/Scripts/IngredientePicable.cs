@@ -4,6 +4,10 @@ using UnityEngine.Events;
 
 public class IngredientePicable : MonoBehaviour
 {
+    [Header("Receta")]
+    [Tooltip("Id del ingrediente para la receta: cebolla, yuca, caracoles, sal... (sin tildes ni espacios)")]
+    [SerializeField] private string idIngrediente = "";
+    public string IdIngrediente => idIngrediente;
     [Header("Modelos visuales")]
     [SerializeField] private GameObject modeloEntero;
     [SerializeField] private GameObject modeloPicado;

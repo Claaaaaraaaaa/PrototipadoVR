@@ -3,6 +3,11 @@ using UnityEngine;
 
 public class IngredienteEntero : MonoBehaviour
 {
+
+    [Header("Receta")]
+    [Tooltip("Id del ingrediente para la receta: cebolla, yuca, caracoles, sal... (sin tildes ni espacios)")]
+    [SerializeField] private string idIngrediente = "";
+    public string IdIngrediente => idIngrediente;
     private bool dentroDeOlla = false;
     public bool DentroDeOlla => dentroDeOlla;
 

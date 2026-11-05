@@ -47,7 +47,7 @@ public class DetectorOlla : MonoBehaviour
             if (PuedeAceptar(picable.gameObject) &&
                 picable.IncorporarAlaOlla(puntoDestinoIngredientes))
             {
-                Registrar(picable.gameObject);
+                Registrar(picable.gameObject, picable.IdIngrediente);
             }
             return;
         }
@@ -62,7 +62,7 @@ public class DetectorOlla : MonoBehaviour
             if (PuedeAceptar(entero.gameObject) &&
                 entero.IncorporarAlaOlla(puntoDestinoIngredientes))
             {
-                Registrar(entero.gameObject);
+                Registrar(entero.gameObject, entero.IdIngrediente);
             }
         }
     }
@@ -82,14 +82,27 @@ public class DetectorOlla : MonoBehaviour
         return true;
     }
 
-    private void Registrar(GameObject ingrediente)
+    private void Registrar(GameObject ingrediente, string idIngrediente)
     {
         yaIncorporados.Add(ingrediente);
+
+        // Aviso general (por si algun paso cuenta "cualquier ingrediente")
         RecetaEventos.Notificar(RecetaEventos.IngredienteEnOlla);
 
+        // Aviso del ingrediente concreto: marca su paso en el libro
+        if (string.IsNullOrWhiteSpace(idIngrediente))
+        {
+            Debug.LogWarning("[DetectorOlla] " + ingrediente.name +
+                             " no tiene 'Id Ingrediente'. Asignalo en el Inspector.", ingrediente);
+        }
+        else
+        {
+            RecetaEventos.Notificar(RecetaEventos.EnOlla(idIngrediente));
+        }
+
         if (mostrarDebug)
-            Debug.Log("[DetectorOlla] Ingrediente en la olla: " + ingrediente.name +
-                      " (total: " + yaIncorporados.Count + ")", this);
+            Debug.Log("[DetectorOlla] En la olla: " + ingrediente.name +
+                      " (id: " + idIngrediente + ")", this);
     }
 
     public void Reiniciar()
