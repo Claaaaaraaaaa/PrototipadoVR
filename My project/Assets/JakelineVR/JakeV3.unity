@@ -3918,6 +3918,7 @@ GameObject:
   - component: {fileID: 329070584}
   - component: {fileID: 329070582}
   - component: {fileID: 329070583}
+  - component: {fileID: 329070585}
   m_Layer: 0
   m_Name: '[BuildingBlock] Olla'
   m_TagString: Untagged
@@ -4010,6 +4011,30 @@ MonoBehaviour:
   installationRoutineCheckpoint:
     _installationRoutineId: 
     _installationVariants: []
+--- !u!114 &329070585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 329070580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83146c0c33f95e946b3067e51e9f0f6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OllaEstado
+  visualVacia: []
+  visualAgua: {fileID: 919132149155446097, guid: 091056d05c45422489c2009c6ba92855, type: 3}
+  visualRondon: {fileID: 0}
+  alLlenarse:
+    m_PersistentCalls:
+      m_Calls: []
+  alHacerseRondon:
+    m_PersistentCalls:
+      m_Calls: []
+  alVaciarse:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &340320206
 GameObject:
   m_ObjectHideFlags: 0
@@ -34401,6 +34426,7 @@ GameObject:
   - component: {fileID: 2140707108}
   - component: {fileID: 2140707106}
   - component: {fileID: 2140707107}
+  - component: {fileID: 2140707110}
   m_Layer: 0
   m_Name: SnapDetectionOlla
   m_TagString: Untagged
@@ -34464,7 +34490,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -34485,6 +34511,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 774935042}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2140707110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2140707105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83e18dafd599dbe4ca312190477f4216, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ZonaReceta
+  accion: 0
+  segundosDentro: 2
+  soloSiEstaSuelta: 1
+  idAccion: olla_con_agua
+  requiereOllaConAgua: 1
+  alColocar:
+    m_PersistentCalls:
+      m_Calls: []
+  alQuitar:
+    m_PersistentCalls:
+      m_Calls: []
+  alCompletar:
+    m_PersistentCalls:
+      m_Calls: []
+  mostrarDebug: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
