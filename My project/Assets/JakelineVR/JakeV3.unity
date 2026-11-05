@@ -13938,6 +13938,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1527611202}
     m_Modifications:
+    - target: {fileID: 2638164174699168592, guid: 72f78782c1bf79a43b5e080c2ad276eb, type: 3}
+      propertyPath: idIngrediente
+      value: leche_coco
+      objectReference: {fileID: 0}
     - target: {fileID: 6380718468330457229, guid: 72f78782c1bf79a43b5e080c2ad276eb, type: 3}
       propertyPath: m_Name
       value: Leche de Coco [BuildingBlock] 1
