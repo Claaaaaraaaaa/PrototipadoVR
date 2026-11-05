@@ -373,6 +373,7 @@ public class RecetaManager : MonoBehaviour
                 new SubPasoReceta("Ajo",           RecetaEventos.EnOlla("ajo_picado")),
                 new SubPasoReceta("Cola de cerdo", RecetaEventos.EnOlla("cola_de_cerdo")),
                 new SubPasoReceta("Pescado",       RecetaEventos.EnOlla("pescado"))),
+
             // 3
             PasoReceta.ConSubpasos("Agrega enteros a la olla los siguientes ingredientes:",
                 new SubPasoReceta("Caracoles",      RecetaEventos.EnOlla("caracoles")),
