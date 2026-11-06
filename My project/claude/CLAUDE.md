@@ -70,6 +70,22 @@ Todos los ingredientes con varias unidades (3 cebollas, 5 ajos, 2 plátanos) lle
 - **Pasar página:** Building Block `ISDK_PokeInteraction` + `Interactable Unity Event Wrapper` → `When Select` → `NavegacionRecetario.SiguientePagina`.
 - **`PanelSeguirCamara`**: en cada zona de `ZonasPaneles` (ZonaBarra, ZonaEstufa, ZonaAlacena, Comienzo, MenuZonas, ZonaNevera). Seguimiento perezoso, se congela al apuntar y apaga el agarre a distancia mientras se apunta (`Desactivar Mientras Apunta`). **Nunca** un objeto con este script dentro de otro que también lo tenga.
 
+## Audio
+
+- Los clips están en `Assets/JakelineVR/AUDIOS/OneDrive_2026-11-06/realidad virtual/`.
+- **`Ambiente`** (raíz de la escena): hijos `Mar`, `Gaviotas`, `Musica` y `Palmeras`, cada uno con un `AudioSource` 2D en bucle y `Play On Awake`. Se mezclan cambiando el `Volume` de cada uno. `mar` y `musica caribeña` usan Load Type = Streaming para ahorrar memoria.
+
+- **`SonidosCocina`** en **`Efectos`** (raíz de la escena): un `AudioSource` hijo por sonido, sin `Play On Awake`. Los scripts avisan con métodos estáticos y el sonido se coloca en el punto de la acción (3D); `Celebracion` es 2D.
+
+| Sonido | Cuándo | Quién avisa |
+|---|---|---|
+| `Cortar` | Cada corte válido | `IngredientePicable.Picar` |
+| `PrenderEstufa` | Solo si el fogón enciende de verdad | `ControlFogon.IntentarEncender` |
+| `AguaHirviendo` (bucle) | Hay fuego, olla encima y aún no es rondón | `ControlFogon.Update` |
+| `SopaEnPlato` | El cucharón lleno toca el plato | `Plato.OnTriggerEnter` |
+| `PasarPagina` | Al pasar página, después del antirrebote | `NavegacionRecetario.SiguientePagina` |
+| `Celebracion` | Al completar la receta | `onRecetaCompletada` |
+
 ## Lecciones aprendidas (evitar repetir)
 
 - **Rayo o láser que parpadea:** casi siempre es (a) la superficie moviéndose mientras se apunta, (b) dos scripts moviendo la misma jerarquía o (c) otro interactor (agarre a distancia o cercano) compitiendo en el mismo grupo de la mano. La solución es congelar al interactuar y apagar los interactores que compiten.

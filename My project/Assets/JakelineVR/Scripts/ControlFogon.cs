@@ -36,6 +36,7 @@ public class ControlFogon : MonoBehaviour
     private bool encendido = false;
     private float tiempoCoccion = 0f;
     private bool cocinado = false;
+    private bool hirviendo = false;
 
     public bool Encendido => encendido;
 
@@ -58,6 +59,8 @@ public class ControlFogon : MonoBehaviour
     {
         if (zonaEstufa != null)
             zonaEstufa.alColocar.RemoveListener(AlColocarOlla);
+
+        FijarHervor(false, transform.position);
     }
 
     // ------------------------------------------------------------------
@@ -91,6 +94,7 @@ public class ControlFogon : MonoBehaviour
         encendido = true;
         if (efectoFogon != null) efectoFogon.SetActive(true);
 
+        SonidosCocina.PrenderEstufa(transform.position);
         alEncender.Invoke();
         RecetaEventos.Notificar(RecetaEventos.EstufaEncendida);
 
@@ -121,6 +125,11 @@ public class ControlFogon : MonoBehaviour
 
     private void Update()
     {
+        // El agua suena mientras hay fuego, olla encima y todavia no es rondon.
+        OllaEstado ollaEncima = zonaEstufa != null ? zonaEstufa.OllaDentro : null;
+        FijarHervor(encendido && ollaEncima != null && ollaEncima.EstadoActual != OllaEstado.Estado.Rondon,
+            ollaEncima != null ? ollaEncima.transform.position : transform.position);
+
         if (!encendido || cocinado || zonaEstufa == null) return;
 
         OllaEstado olla = zonaEstufa.OllaDentro;
@@ -139,6 +148,13 @@ public class ControlFogon : MonoBehaviour
     // ------------------------------------------------------------------
     // Utilidades
     // ------------------------------------------------------------------
+
+    private void FijarHervor(bool valor, Vector3 posicion)
+    {
+        if (valor == hirviendo) return;
+        hirviendo = valor;
+        SonidosCocina.AguaHirviendo(valor, posicion);
+    }
 
     private bool IngredientesListos(out string falta)
     {

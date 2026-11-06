@@ -38,6 +38,7 @@ public class Plato : MonoBehaviour
 
         // El cucharon siempre se vacia: si se lleno antes de tiempo, se puede volver a llenar.
         cucharon.Vaciar();
+        SonidosCocina.SopaEnPlato(transform.position);
 
         if (!estaServido)
         {

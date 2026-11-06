@@ -27,6 +27,8 @@ public class NavegacionRecetario : MonoBehaviour
 
         pagina1.SetActive(!segundaPagina);
         pagina2.SetActive(segundaPagina);
+
+        SonidosCocina.PasarPagina(transform.position);
     }
 
     public void MostrarPagina1()

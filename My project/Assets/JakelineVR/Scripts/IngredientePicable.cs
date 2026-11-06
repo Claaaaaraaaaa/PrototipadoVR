@@ -58,6 +58,7 @@ public class IngredientePicable : MonoBehaviour
         }
 
         cortes++;
+        SonidosCocina.Cortar(transform.position);
         alCortar.Invoke();
 
         if (cortes < cortesNecesarios)
@@ -86,7 +87,7 @@ public class IngredientePicable : MonoBehaviour
 
         dentroDeOlla = true;
 
-        // Se ha removido la lógica de desactivación de Meta XR y Colliders ya que el objeto será destruido.
+        // Se ha removido la lÃ³gica de desactivaciÃ³n de Meta XR y Colliders ya que el objeto serÃ¡ destruido.
 
         Debug.Log("Ingrediente picable destruido al entrar a la olla: " + gameObject.name, this);
         Destroy(gameObject);
