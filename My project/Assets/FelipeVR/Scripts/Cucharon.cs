@@ -30,7 +30,7 @@ public class Cucharon : MonoBehaviour
 
         if (mostrarDebug) Debug.Log("[Cucharon] Lleno de rondon.", this);
 
-        // El cucharon se llena dos veces en la receta. Solo cuenta para el paso
+        // El cucharon puede llenarse antes de tiempo. Solo cuenta para el paso
         // "llenar el cucharon" cuando ya se hizo todo lo anterior (plato en la mesa).
         if (PasosPreviosListos(RecetaEventos.CucharonLleno))
             RecetaEventos.Notificar(RecetaEventos.CucharonLleno);

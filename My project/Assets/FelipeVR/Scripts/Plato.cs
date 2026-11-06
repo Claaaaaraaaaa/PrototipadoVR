@@ -36,24 +36,19 @@ public class Plato : MonoBehaviour
         if (cucharon == null || !cucharon.EstaLleno)
             return;
 
-        // Primera vez: servir el plato desde la olla (paso 6)
+        // El cucharon siempre se vacia: si se lleno antes de tiempo, se puede volver a llenar.
+        cucharon.Vaciar();
+
         if (!estaServido)
         {
             estaServido = true;
             MostrarComida();
-            cucharon.Vaciar();
-
-            RecetaEventos.Notificar(RecetaEventos.PlatoServido);
-            if (mostrarDebug) Debug.Log("[Plato] Plato servido.", this);
-            return;
         }
 
-        // Segunda vez: servir de nuevo en la mesa (paso 9)
+        if (mostrarDebug) Debug.Log("[Plato] Plato servido.", this);
+
+        // Solo cuenta para el paso 8 si ya se hizo todo lo anterior.
         if (Cucharon.PasosPreviosListos(RecetaEventos.CucharonServido))
-        {
-            cucharon.Vaciar();
             RecetaEventos.Notificar(RecetaEventos.CucharonServido);
-            if (mostrarDebug) Debug.Log("[Plato] Servido otra vez en la mesa.", this);
-        }
     }
 }

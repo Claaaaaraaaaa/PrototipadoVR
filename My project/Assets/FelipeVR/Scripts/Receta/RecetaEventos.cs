@@ -11,7 +11,6 @@ public static class RecetaEventos
     public const string IngredienteEnOlla = "ingrediente_en_olla"; // cualquier ingrediente (general)
     public const string LecheCocoEnOlla = "leche_coco_en_olla";
     public const string EstufaEncendida = "estufa_encendida";
-    public const string PlatoServido = "plato_servido";
     public const string PlatoEnMesa = "plato_en_mesa";
     public const string CucharonLleno = "cucharon_lleno";
     public const string CucharonServido = "cucharon_servido";

@@ -25392,6 +25392,7 @@ GameObject:
   - component: {fileID: 1367061394}
   - component: {fileID: 1367061397}
   - component: {fileID: 1367061396}
+  - component: {fileID: 1367061398}
   m_Layer: 0
   m_Name: SnapZonePlato
   m_TagString: Untagged
@@ -25463,6 +25464,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Oculus.Interaction::Oculus.Interaction.TagSet
   _tags:
   - Plato
+--- !u!114 &1367061398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1367061391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fd55f8137e940af930fa08d330c854d, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::SnapNotificarPaso
+  idAccion: plato_en_mesa
+  mostrarDebug: 1
 --- !u!1 &1371226210
 GameObject:
   m_ObjectHideFlags: 0
@@ -32540,6 +32555,7 @@ GameObject:
   - component: {fileID: 1745292286}
   - component: {fileID: 1745292282}
   - component: {fileID: 1745292281}
+  - component: {fileID: 1745292288}
   m_Layer: 0
   m_Name: "Cuchar\xF3n [BuildingBlock]"
   m_TagString: Untagged
@@ -32632,6 +32648,21 @@ Transform:
   - {fileID: 209528825}
   m_Father: {fileID: 1527611202}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1745292288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1745292280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4618d668017b7447b5e7a464b6334f6, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::VolverAPosicion
+  agarrable: {fileID: 1745292281}
+  esperaAntesDeVolver: 0.5
+  duracionRegreso: 0.6
 --- !u!1 &1745488465
 GameObject:
   m_ObjectHideFlags: 0
