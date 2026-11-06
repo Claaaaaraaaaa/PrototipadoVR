@@ -61,6 +61,8 @@ Todos los ingredientes con varias unidades (3 cebollas, 5 ajos, 2 plátanos) lle
 
 - **`SnapNotificarPaso`** (`SnapZonePlato`, junto al `SnapInteractable`, que usa el Rigidbody de `SnapDetectionPlato`): cuando el plato encaja al soltarlo, notifica `plato_en_mesa`. No exige que esté servido ni que los pasos anteriores estén completos.
 
+- **`InspeccionPlato`** (raíz de `Plato[BuildingBlock]`, con `Camara` = `CenterEyeAnchor`): con la receta completa apaga el `SnapInteractor` y se pone como transformador del `Grabbable`. Al agarrar, el plato flota frente al usuario y gira sobre su centro visual siguiendo la mano. Al soltarlo, espera `Segundos Antes De Volver` y regresa a su sitio. Antes de completar la receta, el agarre es normal.
+
 ## Recetario e interfaz VR
 
 - **`ControlRecetario`** (en `Receta manager`): al agarrar el libro de la barra (`Grabbable`) activa `AnclaLibro` y oculta `ZonasPaneles`. Mientras está abierto y el libro ya se soltó, apaga `Desactivar Mientras Abierto` (agarre a distancia y `HandGrabInteractable` del libro) para que no compitan con el rayo o el poke. `Cerrar()` lo revierte.

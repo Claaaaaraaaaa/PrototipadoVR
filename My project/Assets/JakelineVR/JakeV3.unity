@@ -20660,6 +20660,7 @@ GameObject:
   - component: {fileID: 1143978672}
   - component: {fileID: 1143978668}
   - component: {fileID: 1143978667}
+  - component: {fileID: 1143978674}
   m_Layer: 0
   m_Name: 'Plato[BuildingBlock]'
   m_TagString: Untagged
@@ -20667,6 +20668,24 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1143978674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1143978666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0122601f578c47ca9826ef9324597a57, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::InspeccionPlato
+  camara: {fileID: 1060961172}
+  distancia: 0.45
+  desnivel: -0.1
+  sensibilidad: 1.5
+  duracionViaje: 0.5
+  segundosAntesDeVolver: 4
 --- !u!114 &1143978667
 MonoBehaviour:
   m_ObjectHideFlags: 0
