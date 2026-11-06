@@ -68,6 +68,7 @@ Todos los ingredientes con varias unidades (3 cebollas, 5 ajos, 2 plátanos) lle
 - **`ControlRecetario`** (en `Receta manager`): al agarrar el libro de la barra (`Grabbable`) activa `AnclaLibro` y oculta `ZonasPaneles`. Mientras está abierto y el libro ya se soltó, apaga `Desactivar Mientras Abierto` (agarre a distancia y `HandGrabInteractable` del libro) para que no compitan con el rayo o el poke. `Cerrar()` lo revierte.
 - **`AnclaLibro`**: fuera de `CenterEyeAnchor`, en un sitio fijo sobre la barra, con **`MirarAlUsuario`**. Gira para mirar al usuario (solo eje Y), pero **se congela** mientras hay hover o select de cualquier `IPointable` hijo o una mano cerca.
 - **Pasar página:** Building Block `ISDK_PokeInteraction` + `Interactable Unity Event Wrapper` → `When Select` → `NavegacionRecetario.SiguientePagina`.
+- **`CartelTeleport`** (`Teleport Hotspot BARRA/Cartel Aqui`): canvas con el estilo del botón `Siguiente pagina`. Mira al usuario y se destruye al teletransportarse a ese hotspot. Sin colliders, para no bloquear el rayo de teleport.
 - **`PanelSeguirCamara`**: en cada zona de `ZonasPaneles` (ZonaBarra, ZonaEstufa, ZonaAlacena, Comienzo, MenuZonas, ZonaNevera). Seguimiento perezoso, se congela al apuntar y apaga el agarre a distancia mientras se apunta (`Desactivar Mientras Apunta`). **Nunca** un objeto con este script dentro de otro que también lo tenga.
 
 ## Guía visual
