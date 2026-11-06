@@ -1,11 +1,12 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
 /// <summary>
 /// SOLO PARA PRUEBAS. Permite avanzar los pasos de la receta sin hacer las acciones.
-///   - Teclado (Editor / PC):  N = avanzar paso,  B = deshacer paso,  R = reiniciar
+///   - Teclado (Editor / PC):  N = avanzar,  B = deshacer,  R = reiniciar,
+///                             I = completar todo hasta la estufa (agua + ingredientes + leche)
 ///   - Control del Quest:      boton B/Y (OVRInput.Button.Two) = avanzar paso
-///   - Boton de UI: conecta su OnClick a RecetaManager.AvanzarPaso
+///   - Inspector:              casilla "Completar Ingredientes Ahora" o menu (⋮)
 /// Para quitarlo del juego final basta con borrar este componente.
 /// </summary>
 public class RecetaDebugInput : MonoBehaviour
@@ -16,10 +17,15 @@ public class RecetaDebugInput : MonoBehaviour
     [SerializeField] private Key teclaAvanzar = Key.N;
     [SerializeField] private Key teclaRetroceder = Key.B;
     [SerializeField] private Key teclaReiniciar = Key.R;
+    [SerializeField] private Key teclaCompletarIngredientes = Key.I;
 
     [Header("Control VR")]
     [SerializeField] private bool usarControlVR = true;
     [SerializeField] private OVRInput.Button botonAvanzar = OVRInput.Button.Two;
+
+    [Header("Atajos de prueba (marcar en Play)")]
+    [Tooltip("Marca esta casilla en Play: completa agua, ingredientes y leche de coco. Se desmarca sola.")]
+    [SerializeField] private bool completarIngredientesAhora = false;
 
     [Header("Seguridad")]
     [Tooltip("Si esta apagado, en un build que no sea de desarrollo estos atajos no hacen nada.")]
@@ -34,6 +40,14 @@ public class RecetaDebugInput : MonoBehaviour
     private void Update()
     {
         if (manager == null) return;
+
+        // Casilla del Inspector
+        if (completarIngredientesAhora)
+        {
+            completarIngredientesAhora = false;
+            CompletarIngredientes();
+        }
+
         if (!permitirEnBuildFinal && !Application.isEditor && !Debug.isDebugBuild) return;
 
         Keyboard teclado = Keyboard.current;
@@ -42,9 +56,39 @@ public class RecetaDebugInput : MonoBehaviour
             if (teclado[teclaAvanzar].wasPressedThisFrame) manager.AvanzarPaso();
             if (teclado[teclaRetroceder].wasPressedThisFrame) manager.RetrocederPaso();
             if (teclado[teclaReiniciar].wasPressedThisFrame) manager.Reiniciar();
+            if (teclado[teclaCompletarIngredientes].wasPressedThisFrame) CompletarIngredientes();
         }
 
         if (usarControlVR && OVRInput.GetDown(botonAvanzar))
             manager.AvanzarPaso();
+    }
+
+    /// <summary>
+    /// PRUEBA: deja todo listo para encender la estufa
+    /// (paso 1 agua, paso 2 picados, paso 3 enteros, paso 4 leche de coco).
+    /// </summary>
+    [ContextMenu("PRUEBA: Completar ingredientes (hasta la estufa)")]
+    public void CompletarIngredientes()
+    {
+        if (!Application.isPlaying)
+        {
+            Debug.LogWarning("[RecetaDebug] Esto solo funciona con el juego en Play.", this);
+            return;
+        }
+
+        if (manager == null) manager = FindFirstObjectByType<RecetaManager>();
+        if (manager == null)
+        {
+            Debug.LogWarning("[RecetaDebug] No hay RecetaManager en la escena.", this);
+            return;
+        }
+
+        manager.CompletarHasta(RecetaEventos.EstufaEncendida);
+
+        // Que la olla tambien se vea con agua
+        OllaEstado olla = FindFirstObjectByType<OllaEstado>();
+        if (olla != null) olla.Llenar();
+
+        Debug.Log("[RecetaDebug] PRUEBA: pasos completados hasta la estufa. Ya puedes encender el fogon.", this);
     }
 }

@@ -6,11 +6,14 @@ public class Cucharon : MonoBehaviour
     [SerializeField] private GameObject modeloVacio;
     [SerializeField] private GameObject modeloLleno;
 
-    [Header("Configuración")]
-    [Tooltip("Escribe aquí el nombre exacto del objeto en la olla")]
-    [SerializeField] private string nombreComidaOlla = "rondon en olla";
+    [Header("Receta")]
+    [Tooltip("Solo se llena si la olla ya tiene el rondon cocinado")]
+    [SerializeField] private bool soloSiHayRondon = true;
+    [SerializeField] private bool mostrarDebug = true;
 
     public bool EstaLleno { get; private set; } = false;
+
+    private bool avisoSinRondon;
 
     private void Start()
     {
@@ -25,10 +28,12 @@ public class Cucharon : MonoBehaviour
         if (modeloVacio != null) modeloVacio.SetActive(false);
         if (modeloLleno != null) modeloLleno.SetActive(true);
 
-        Debug.Log("Cucharón lleno de rondón.");
+        if (mostrarDebug) Debug.Log("[Cucharon] Lleno de rondon.", this);
 
-        // Descomenta esta línea si estás usando el sistema de eventos de la receta
-        // RecetaEventos.Notificar(RecetaEventos.CucharonLleno);
+        // El cucharon se llena dos veces en la receta. Solo cuenta para el paso
+        // "llenar el cucharon" cuando ya se hizo todo lo anterior (plato en la mesa).
+        if (PasosPreviosListos(RecetaEventos.CucharonLleno))
+            RecetaEventos.Notificar(RecetaEventos.CucharonLleno);
     }
 
     public void Vaciar()
@@ -40,10 +45,29 @@ public class Cucharon : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // Verifica si el objeto que tocó el cucharón contiene el nombre configurado
-        if (other.gameObject.name.Contains(nombreComidaOlla))
+        if (EstaLleno) return;
+
+        // ¿Lo que toco es la olla?
+        OllaEstado olla = other.GetComponentInParent<OllaEstado>();
+        if (olla == null) return;
+
+        if (soloSiHayRondon && olla.EstadoActual != OllaEstado.Estado.Rondon)
         {
-            Llenar();
+            if (mostrarDebug && !avisoSinRondon)
+                Debug.Log("[Cucharon] La olla todavia no tiene rondon (falta cocinar).", this);
+            avisoSinRondon = true;
+            return;
         }
+
+        avisoSinRondon = false;
+        Llenar();
+    }
+
+    public static bool PasosPreviosListos(string idAccion)
+    {
+        RecetaManager m = RecetaManager.Instancia != null
+            ? RecetaManager.Instancia
+            : FindFirstObjectByType<RecetaManager>();
+        return m == null || m.PasosPreviosCompletos(idAccion);
     }
 }

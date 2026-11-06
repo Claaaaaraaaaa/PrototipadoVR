@@ -339,6 +339,44 @@ public class RecetaManager : MonoBehaviour
         CambioEstado?.Invoke();
     }
 
+    /// <summary>
+    /// True si todos los pasos ANTERIORES al paso que espera 'idAccion' estan completos.
+    /// Ej: PasosPreviosCompletos(EstufaEncendida) = agua, ingredientes y leche de coco listos.
+    /// </summary>
+    public bool PasosPreviosCompletos(string idAccion)
+    {
+        Inicializar();
+        for (int i = 0; i < pasos.Count; i++)
+        {
+            if (!pasos[i].TieneSubpasos && pasos[i].accionRequerida == idAccion)
+                return true;            // llegamos al paso sin encontrar ninguno pendiente
+
+            if (!pasos[i].completado)
+                return false;           // hay un paso anterior sin hacer
+        }
+        return true;
+    }
+
+    /// <summary>PRUEBA: completa todos los pasos ANTERIORES al paso que espera 'idAccion'.</summary>
+    public void CompletarHasta(string idAccion)
+    {
+        Inicializar();
+        for (int i = 0; i < pasos.Count; i++)
+        {
+            if (!pasos[i].TieneSubpasos && pasos[i].accionRequerida == idAccion)
+                return;          // llegamos al paso objetivo: este no se completa
+
+            CompletarPaso(i);    // si ya estaba completo no hace nada
+        }
+    }
+
+    /// <summary>Texto del primer paso pendiente (para avisar al usuario de que falta).</summary>
+    public string TextoPasoActual()
+    {
+        int actual = PasoActual;
+        return actual < pasos.Count ? pasos[actual].texto : "";
+    }
+
     [ContextMenu("Cargar pasos por defecto")]
     private void CargarPasosPorDefecto()
     {

@@ -182,4 +182,7 @@ public class ZonaReceta : MonoBehaviour
         if (mostrarDebug)
             Debug.Log("[ZonaReceta] " + name + ": " + msg, this);
     }
+
+    /// <summary>La olla que esta ahora mismo dentro de la zona (o null).</summary>
+    public OllaEstado OllaDentro => ollaDentro;
 }

@@ -2,11 +2,13 @@ using UnityEngine;
 
 public class Plato : MonoBehaviour
 {
-    [Header("Configuración del Plato")]
-    [Tooltip("Nombre exacto del objeto que es solo el plato vacío (según tu imagen, es Cylinder).")]
+    [Header("Configuracion del Plato")]
+    [Tooltip("Nombre exacto del hijo que es solo el plato vacio (Cylinder).")]
     [SerializeField] private string nombreBasePlato = "Cylinder";
+    [SerializeField] private bool mostrarDebug = true;
 
     private bool estaServido = false;
+    public bool EstaServido => estaServido;
 
     private void Start()
     {
@@ -15,45 +17,43 @@ public class Plato : MonoBehaviour
 
     private void OcultarComida()
     {
-        // Recorre todos los objetos hijos (Cylinder.001, Vuelta_01, etc.)
         foreach (Transform hijo in transform)
-        {
-            // Si el hijo NO se llama "Cylinder", lo apaga
             if (hijo.name != nombreBasePlato)
-            {
                 hijo.gameObject.SetActive(false);
-            }
-        }
     }
 
     private void MostrarComida()
     {
-        // Enciende todos los objetos hijos para mostrar el rondón completo
         foreach (Transform hijo in transform)
-        {
             hijo.gameObject.SetActive(true);
-        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (estaServido) return;
-
-        // Verifica si lo que entró al trigger del plato fue el cucharón
         Cucharon cucharon = other.GetComponentInParent<Cucharon>();
         if (cucharon == null) cucharon = other.GetComponentInChildren<Cucharon>();
 
-        // Si es el cucharón y además tiene comida
-        if (cucharon != null && cucharon.EstaLleno)
+        if (cucharon == null || !cucharon.EstaLleno)
+            return;
+
+        // Primera vez: servir el plato desde la olla (paso 6)
+        if (!estaServido)
         {
             estaServido = true;
             MostrarComida();
-            cucharon.Vaciar(); // El cucharón vuelve a quedar vacío después de servir
+            cucharon.Vaciar();
 
-            Debug.Log("Plato servido con éxito.");
+            RecetaEventos.Notificar(RecetaEventos.PlatoServido);
+            if (mostrarDebug) Debug.Log("[Plato] Plato servido.", this);
+            return;
+        }
 
-            // Descomenta si usas el recetario:
-            // RecetaEventos.Notificar(RecetaEventos.PlatoServido);
+        // Segunda vez: servir de nuevo en la mesa (paso 9)
+        if (Cucharon.PasosPreviosListos(RecetaEventos.CucharonServido))
+        {
+            cucharon.Vaciar();
+            RecetaEventos.Notificar(RecetaEventos.CucharonServido);
+            if (mostrarDebug) Debug.Log("[Plato] Servido otra vez en la mesa.", this);
         }
     }
 }
