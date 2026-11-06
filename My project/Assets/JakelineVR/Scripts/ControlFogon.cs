@@ -94,7 +94,7 @@ public class ControlFogon : MonoBehaviour
         encendido = true;
         if (efectoFogon != null) efectoFogon.SetActive(true);
 
-        SonidosCocina.PrenderEstufa(transform.position);
+        SonidosCocina.Sonar(Sonido.PrenderEstufa, transform.position);
         alEncender.Invoke();
         RecetaEventos.Notificar(RecetaEventos.EstufaEncendida);
 

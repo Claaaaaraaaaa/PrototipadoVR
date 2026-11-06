@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a88496510d9f4de6b5860a44396d44b3, type: 3}
+  m_Name: AjustesSonidos
+  m_EditorClassIdentifier: Assembly-CSharp::AjustesSonidos
+  mostrarDebug: 1
+  ajustes:
+  - sonido: 0
+    inicio: 0.25
+    retraso: 0
+    volumen: 1
+    duracion: 0
+  - sonido: 1
+    inicio: 0.05
+    retraso: 0
+    volumen: 1
+    duracion: 0
+  - sonido: 2
+    inicio: 0
+    retraso: 0
+    volumen: 0.7
+    duracion: 0
+  - sonido: 3
+    inicio: 0.45
+    retraso: 0
+    volumen: 1
+    duracion: 0
+  - sonido: 4
+    inicio: 0.03
+    retraso: 0
+    volumen: 1
+    duracion: 0
+  - sonido: 5
+    inicio: 0.03
+    retraso: 0
+    volumen: 1
+    duracion: 0
+  - sonido: 6
+    inicio: 0.084
+    retraso: 0
+    volumen: 0.8
+    duracion: 3.5
+  - sonido: 7
+    inicio: 0
+    retraso: 0
+    volumen: 0.8
+    duracion: 3.5

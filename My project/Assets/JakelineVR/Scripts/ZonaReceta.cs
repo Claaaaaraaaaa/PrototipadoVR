@@ -81,6 +81,8 @@ public class ZonaReceta : MonoBehaviour
             ultimoMotivo = null;
 
             Log("entro " + olla.name + " (accion: " + accion + ", espera " + segundosDentro + " s)");
+            if (accion == Accion.LlenarOlla && !olla.TieneAgua)
+                SonidosCocina.LlenandoOlla(true, olla.transform.position);
             alColocar.Invoke();
         }
     }
@@ -100,6 +102,8 @@ public class ZonaReceta : MonoBehaviour
             Log("salio " + olla.name);
             ollaDentro = null;
             agarreOlla = null;
+            if (accion == Accion.LlenarOlla)
+                SonidosCocina.LlenandoOlla(false, olla.transform.position);
             alQuitar.Invoke();
         }
     }

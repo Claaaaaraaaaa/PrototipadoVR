@@ -58,7 +58,7 @@ public class IngredientePicable : MonoBehaviour
         }
 
         cortes++;
-        SonidosCocina.Cortar(transform.position);
+        SonidosCocina.Sonar(Sonido.Cortar, transform.position);
         alCortar.Invoke();
 
         if (cortes < cortesNecesarios)

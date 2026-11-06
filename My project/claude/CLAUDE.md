@@ -85,6 +85,9 @@ Todos los ingredientes con varias unidades (3 cebollas, 5 ajos, 2 plátanos) lle
 | `SopaEnPlato` | El cucharón lleno toca el plato | `Plato.OnTriggerEnter` |
 | `PasarPagina` | Al pasar página, después del antirrebote | `NavegacionRecetario.SiguientePagina` |
 | `Celebracion` | Al completar la receta | `onRecetaCompletada` |
+| `AguaLlave` y `AguaEnOlla` | La olla vacía entra en `SnapDetectionOlla` (lavamanos); se apagan al quitarla o al cumplirse su `Duracion` | `ZonaReceta` (`LlenarOlla`) |
+
+**Ajustar tiempos:** `Assets/JakelineVR/AjustesSonidos.asset` (Inicio, Retraso, Volumen, Duración y botón Probar en Play). Lo cambiado durante el Play se conserva, y `Guardar ajustes` lo escribe en disco. Si un sonido llega tarde, se sube `Inicio`, porque varios MP3 empiezan con silencio. El `Volume` del `AudioSource` no sirve aquí: lo pisa el asset. Los hijos de `Efectos` deben llamarse igual que su valor en el enum `Sonido`.
 
 ## Lecciones aprendidas (evitar repetir)
 
