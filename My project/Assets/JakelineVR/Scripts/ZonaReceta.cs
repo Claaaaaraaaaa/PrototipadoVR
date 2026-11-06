@@ -30,6 +30,9 @@ public class ZonaReceta : MonoBehaviour
     public string idAccion = RecetaEventos.OllaConAgua;
     [Tooltip("Solo cuenta si la olla tiene agua")]
     public bool requiereOllaConAgua = true;
+    [Tooltip("Opcional: el paso solo cuenta si la olla esta encajada en este snap. " +
+             "Hace falta si esta zona se solapa con otra.")]
+    public SnapInteractable zonaSnap;
 
     [Header("Eventos (opcional: sonido, particulas...)")]
     public UnityEvent alColocar;
@@ -155,6 +158,11 @@ public class ZonaReceta : MonoBehaviour
                 {
                     Esperando("la olla no tiene agua, no cuenta");
                     return; // sigue esperando por si se llena
+                }
+                if (zonaSnap != null && zonaSnap.State != InteractableState.Select)
+                {
+                    Esperando("la olla todavia no esta encajada en " + zonaSnap.name);
+                    return;
                 }
                 RecetaEventos.Notificar(idAccion);
                 Log("notificado " + idAccion);

@@ -95,7 +95,7 @@ public class SonidosCocina : MonoBehaviour
         AjusteSonido ajuste = ajustes != null ? ajustes.Buscar(sonido) : null;
         if (ajuste == null) ajuste = new AjusteSonido { sonido = sonido };
 
-        if (ajustes != null && ajustes.mostrarDebug)
+        if (ajustes != null && ajustes.mostrarDebug && Debug.isDebugBuild)
             Debug.Log("[Sonido] " + sonido + " t=" + Time.time.ToString("F2") + " inicio=" + ajuste.inicio
                 + " retraso=" + ajuste.retraso + " volumen=" + ajuste.volumen + " duracion=" + ajuste.duracion, this);
 

@@ -47,7 +47,7 @@ Reparto en el libro (`RecetaPasosUI` → Primer Paso / Cantidad): pasos 1 / 2 / 
 | `CuchilloPicador` | Raíz del cuchillo | Trigger de la hoja → `Picar()`. Solo pica si está agarrado. Vuelve a su sitio al soltarlo |
 | `DetectorOlla` | `OLLA_COLOR (1)/DetectorIngredientes` (trigger dentro de la olla) | Acepta ingredientes listos (picados o enteros) **solo si la olla tiene agua**. Cada uno cuenta una vez. **Es el único que notifica** (`EnOlla(id)`); los scripts de ingrediente no notifican |
 | `OllaEstado` | Raíz `[BuildingBlock] Olla` | Estados `Vacia` / `ConAgua` / `Rondon`. Alterna solo los **Renderers** de `Visual Vacia` (Cylinder, Torus, Torus.001) y enciende o apaga los objetos `OLLAagua` y `rondon en olla`, cuyos colliders apaga en `Awake` |
-| `ZonaReceta` | Detectores trigger de las snap zones | Detecta `OllaEstado` dentro. Acciones: `LlenarOlla` (lavamanos), `NotificarPaso` (mesón, `olla_con_agua`, requiere agua), `Ninguna` (estufa: solo expone `OllaDentro`). `Solo Si Esta Suelta` debe estar **desmarcado** |
+| `ZonaReceta` | Detectores trigger de las snap zones | Detecta `OllaEstado` dentro. Acciones: `LlenarOlla` (lavamanos), `NotificarPaso` (mesón, `olla_con_agua`, requiere agua), `Ninguna` (estufa: solo expone `OllaDentro`). `Solo Si Esta Suelta` debe estar **desmarcado**. Las zonas del lavamanos y del mesón se solapan con la olla: por eso el mesón tiene `Zona Snap` = `SnapZoneOlla (1)`, y su paso solo cuenta con la olla encajada |
 | `VolverAPosicion` | Objetos agarrables (libro de la barra, raíz de `Cucharón [BuildingBlock]`) | Vuelven a su posición inicial al soltarlos |
 
 Todos los ingredientes con varias unidades (3 cebollas, 5 ajos, 2 plátanos) llevan el mismo Id. Todos los ajos son picables (`ajo_picado`).
@@ -69,6 +69,21 @@ Todos los ingredientes con varias unidades (3 cebollas, 5 ajos, 2 plátanos) lle
 - **`AnclaLibro`**: fuera de `CenterEyeAnchor`, en un sitio fijo sobre la barra, con **`MirarAlUsuario`**. Gira para mirar al usuario (solo eje Y), pero **se congela** mientras hay hover o select de cualquier `IPointable` hijo o una mano cerca.
 - **Pasar página:** Building Block `ISDK_PokeInteraction` + `Interactable Unity Event Wrapper` → `When Select` → `NavegacionRecetario.SiguientePagina`.
 - **`PanelSeguirCamara`**: en cada zona de `ZonasPaneles` (ZonaBarra, ZonaEstufa, ZonaAlacena, Comienzo, MenuZonas, ZonaNevera). Seguimiento perezoso, se congela al apuntar y apaga el agarre a distancia mientras se apunta (`Desactivar Mientras Apunta`). **Nunca** un objeto con este script dentro de otro que también lo tenga.
+
+## Guía visual
+
+**`GuiaPasos`** (objeto raíz `Guia`) revisa cada 0.2 s qué toca y resalta los objetivos con `Assets/JakelineVR/Guia/ContornoGuia.mat` (color, ancho y pulso se cambian ahí). El contorno es un hijo `ContornoGuia` con la misma malla, creado en ejecución, sin colliders. Las zonas se marcan con un disco, porque los snap no tienen malla: busca la superficie con un raycast y se dibuja siempre encima, aunque algo lo tape.
+
+| Momento | Contorno | Disco |
+|---|---|---|
+| Al empezar, hasta abrir el libro | Libro | |
+| Paso 1, olla sin agua / con agua | Olla | Lavamanos / mesón |
+| Pasos 2 a 4 | Una unidad por ingrediente pendiente (`Solo Una Unidad`), con prioridad a la ya picada; cuchillo si falta picar; olla si hay algo listo para echar | |
+| Paso 5, olla fuera / en la estufa | Olla / perilla del fogón bajo la olla | Estufa / ninguno |
+| Paso 6 | Plato | Mesa |
+| Paso 7, cocinando / rondón listo | Olla / olla y cucharón | |
+| Paso 8 | Plato y cucharón | |
+| Receta completa, hasta agarrar el plato | Plato | |
 
 ## Audio
 
@@ -97,6 +112,8 @@ Todos los ingredientes con varias unidades (3 cebollas, 5 ajos, 2 plátanos) lle
 - **Snap del Interaction SDK:** el `SnapInteractor` comprueba si **su punto** (`Snap Pose Transform` o, si está vacío, el pivote) está dentro de los colliders del `Rigidbody` del `SnapInteractable`. Pivote desplazado = no encaja.
 
 ## Pendiente
+
+- **Rendimiento:** `canasta de huevos_Colorfbx.fbx` (la escena usa la copia de `Assets/Claaaaaraaaaa/OBJETOS PINTADOS/`, bajo `ElementosEscenaOriginal`) tiene 551 168 vértices y es la gran mayoría de los polígonos de la escena. Hay que reducirla en el programa de modelado.
 
 1. **Otras perillas de la estufa** (1, 2, 3): sus wrappers pueden encender el fuego directamente sin comprobaciones. Decidir si se desactivan.
 2. **Ventana AI Tools de Unity:** muestra "Claude CLI not found" porque npm instala `claude.cmd`. Es solo un aviso de esa pantalla: `claude mcp list` muestra `metavr` conectado.

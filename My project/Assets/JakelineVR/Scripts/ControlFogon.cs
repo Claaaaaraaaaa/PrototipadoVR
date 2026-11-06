@@ -39,6 +39,7 @@ public class ControlFogon : MonoBehaviour
     private bool hirviendo = false;
 
     public bool Encendido => encendido;
+    public Vector3 PosicionFuego => efectoFogon != null ? efectoFogon.transform.position : transform.position;
 
     private void Awake()
     {
