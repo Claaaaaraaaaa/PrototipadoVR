@@ -7,25 +7,38 @@ public class DoorTeleportController : MonoBehaviour
     [Tooltip("El pivote o cuerpo de la puerta que va a girar")]
     [SerializeField] private Transform doorTransform;
 
-    [Tooltip("Ángulo de apertura en Y (por defecto 90 grados)")]
-    [SerializeField] private float openAngleY = 90f;
+    [Tooltip("Ángulo de rotación objetivo en grados (X, Y, Z)")]
+    [SerializeField] private Vector3 openRotationAngle = new Vector3(90f, 0f, 0f);
 
-    [Tooltip("Duración de la animación de apertura de la puerta")]
+    [Tooltip("Duración de la animación de apertura con rebote")]
     [SerializeField] private float doorOpenDuration = 1.2f;
 
-    [Header("Transición Radial y Teletransporte")]
-    [Tooltip("El RectTransform del elemento UI circular usado para el cierre radial")]
+    [Header("Transición Radial (Iris Wipe)")]
+    [Tooltip("RectTransform del objeto UI con la textura del agujero")]
     [SerializeField] private RectTransform radialCircleUI;
 
+    [Tooltip("CanvasGroup del FadeCanvas / FadePanel negro")]
+    [SerializeField] private CanvasGroup fadePanelCanvasGroup;
+
+    [Header("Escalas del Agujero Radial")]
+    [Tooltip("Escala donde el agujero es gigante y deja ver la pantalla completa")]
+    [SerializeField] private float maxCircleScale = 15f;
+
+    [Tooltip("Escala donde el agujero se cierra (NUNCA 0 para evitar que desaparezca la textura)")]
+    [SerializeField] private float minCircleScale = 0.05f;
+
+    [Header("Teletransporte y Tiempos")]
     [Tooltip("El objeto [BuildingBlock] Camera Rig o XR Origin")]
     [SerializeField] private Transform xrOrigin;
 
-    [Tooltip("Coordenadas destino según la imagen: X=26, Y=1, Z=163")]
+    [Tooltip("Coordenadas destino (X: 26, Y: 1, Z: 163)")]
     [SerializeField] private Vector3 targetPosition = new Vector3(26f, 1f, 163f);
 
-    [Header("Tiempos Transición Radial")]
-    [SerializeField] private float wipeDuration = 0.8f;
-    [SerializeField] private float maxCircleScale = 15f; // Escala grande que deja ver toda la pantalla
+    [Tooltip("Duración del encogimiento y crecimiento del agujero")]
+    [SerializeField] private float wipeDuration = 1.2f;
+
+    [Tooltip("Tiempo de delay en oscuridad total antes de abrir la vista")]
+    [SerializeField] private float blackScreenDelay = 1.0f;
 
     private bool isInteracting = false;
     private Quaternion initialRotation;
@@ -35,17 +48,16 @@ public class DoorTeleportController : MonoBehaviour
         if (doorTransform == null) doorTransform = transform;
         initialRotation = doorTransform.localRotation;
 
-        // Asegurar que la máscara radial empiece abierta (invisible)
+        // Asegurar que la máscara radial inicie desactivada
         if (radialCircleUI != null)
         {
             radialCircleUI.localScale = Vector3.one * maxCircleScale;
             radialCircleUI.gameObject.SetActive(false);
         }
+
+        // NOTA: No modificamos fadePanelCanvasGroup aquí para no interrumpir la intro inicial.
     }
 
-    /// <summary>
-    /// Conecta esta función al evento UnityEvent de tu Poke Interactable (onSelect / onTrigger)
-    /// </summary>
     public void OpenDoorAndTeleport()
     {
         if (isInteracting) return;
@@ -56,24 +68,22 @@ public class DoorTeleportController : MonoBehaviour
     {
         isInteracting = true;
 
-        // 1. ANIMACIÓN DE PUERTA CON BOUNCE OUT
-        Quaternion targetRotation = initialRotation * Quaternion.Euler(0f, openAngleY, 0f);
+        // 1. ANIMACIÓN DE LA PUERTA (BOUNCE OUT)
+        Quaternion targetRotation = initialRotation * Quaternion.Euler(openRotationAngle);
         float elapsed = 0f;
 
         while (elapsed < doorOpenDuration)
         {
             elapsed += Time.deltaTime;
             float t = Mathf.Clamp01(elapsed / doorOpenDuration);
-
-            // Aplicar Easing Bounce Out
             float bounceT = EaseOutBounce(t);
-            doorTransform.localRotation = Quaternion.Slerp(initialRotation, targetRotation, bounceT);
 
+            doorTransform.localRotation = Quaternion.Slerp(initialRotation, targetRotation, bounceT);
             yield return null;
         }
         doorTransform.localRotation = targetRotation;
 
-        // 2. CERRAR TRANSICIÓN RADIAL (Iris Wipe In)
+        // 2. ENCOGIMIENTO DE LA MÁSCARA RADIAL (MaxScale -> MinScale)
         if (radialCircleUI != null)
         {
             radialCircleUI.gameObject.SetActive(true);
@@ -85,22 +95,36 @@ public class DoorTeleportController : MonoBehaviour
                 float t = Mathf.Clamp01(elapsed / wipeDuration);
                 float smoothT = Mathf.SmoothStep(0f, 1f, t);
 
-                // Escala de grande (pantalla visible) a 0 (pantalla negra)
-                radialCircleUI.localScale = Vector3.one * Mathf.Lerp(maxCircleScale, 0f, smoothT);
+                radialCircleUI.localScale = Vector3.one * Mathf.Lerp(maxCircleScale, minCircleScale, smoothT);
                 yield return null;
             }
-            radialCircleUI.localScale = Vector3.zero;
+            radialCircleUI.localScale = Vector3.one * minCircleScale;
         }
 
-        // 3. TELETRANSPORTE A LA POSICIÓN (26, 1, 163)
+        // 3. ENCENDER FADE PANEL AL FINALIZAR EL ENCOGIMIENTO
+        if (fadePanelCanvasGroup != null)
+        {
+            fadePanelCanvasGroup.gameObject.SetActive(true);
+            fadePanelCanvasGroup.alpha = 1f;
+        }
+
+        // 4. TELETRANSPORTE
         if (xrOrigin != null)
         {
             xrOrigin.position = targetPosition;
         }
 
-        yield return new WaitForSeconds(0.2f); // Pausa breve en negro
+        // 5. PAUSA DE DELAY EN OSCURIDAD
+        yield return new WaitForSeconds(blackScreenDelay);
 
-        // 4. ABRIR TRANSICIÓN RADIAL (Iris Wipe Out)
+        // 6. APAGAR EL FADE PANEL ANTES DE REABRIR LA VISTA
+        if (fadePanelCanvasGroup != null)
+        {
+            fadePanelCanvasGroup.alpha = 0f;
+            fadePanelCanvasGroup.gameObject.SetActive(false);
+        }
+
+        // 7. CRECIMIENTO DE LA MÁSCARA RADIAL (MinScale -> MaxScale)
         if (radialCircleUI != null)
         {
             elapsed = 0f;
@@ -111,8 +135,7 @@ public class DoorTeleportController : MonoBehaviour
                 float t = Mathf.Clamp01(elapsed / wipeDuration);
                 float smoothT = Mathf.SmoothStep(0f, 1f, t);
 
-                // Escala de 0 (pantalla negra) a grande (pantalla visible)
-                radialCircleUI.localScale = Vector3.one * Mathf.Lerp(0f, maxCircleScale, smoothT);
+                radialCircleUI.localScale = Vector3.one * Mathf.Lerp(minCircleScale, maxCircleScale, smoothT);
                 yield return null;
             }
 
@@ -123,27 +146,14 @@ public class DoorTeleportController : MonoBehaviour
         isInteracting = false;
     }
 
-    // Fórmula matemática estándar de Easing Bounce Out
     private float EaseOutBounce(float x)
     {
         float n1 = 7.5625f;
         float d1 = 2.75f;
 
-        if (x < 1f / d1)
-        {
-            return n1 * x * x;
-        }
-        else if (x < 2f / d1)
-        {
-            return n1 * (x -= 1.5f / d1) * x + 0.75f;
-        }
-        else if (x < 2.625f / d1)
-        {
-            return n1 * (x -= 2.25f / d1) * x + 0.9375f;
-        }
-        else
-        {
-            return n1 * (x -= 2.625f / d1) * x + 0.984375f;
-        }
+        if (x < 1f / d1) return n1 * x * x;
+        if (x < 2f / d1) return n1 * (x -= 1.5f / d1) * x + 0.75f;
+        if (x < 2.625f / d1) return n1 * (x -= 2.25f / d1) * x + 0.9375f;
+        return n1 * (x -= 2.625f / d1) * x + 0.984375f;
     }
 }

@@ -3075,7 +3075,8 @@ PrefabInstance:
       value: muebleplatos
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 1490726670484678101, guid: 54804352d83caa34489c92ab32d351ee, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54804352d83caa34489c92ab32d351ee, type: 3}
