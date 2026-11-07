@@ -48128,10 +48128,10 @@ MonoBehaviour:
   _constraints:
     MinAngle:
       Constrain: 1
-      Value: 0
+      Value: -90
     MaxAngle:
       Constrain: 1
-      Value: 90
+      Value: 0
 --- !u!4 &6832641203982158971
 Transform:
   m_ObjectHideFlags: 0
