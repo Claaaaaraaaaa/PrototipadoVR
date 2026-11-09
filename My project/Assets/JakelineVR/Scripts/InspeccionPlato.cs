@@ -24,6 +24,24 @@ public class InspeccionPlato : MonoBehaviour, ITransformer
     [Tooltip("Segundos que sigue flotando despues de soltarlo.")]
     [SerializeField] private float segundosAntesDeVolver = 4f;
 
+    [Header("Panel informativo")]
+    [Tooltip("Canvas con la historia del plato. Se muestra al lado mientras se inspecciona.")]
+    [SerializeField] private GameObject panelInfo;
+    [Tooltip("Metros a la derecha del plato (desde el punto de vista del usuario).")]
+    [SerializeField] private float panelLado = 0.3f;
+    [Tooltip("Metros mas lejos que el plato, para que no lo atraviese al girarlo.")]
+    [SerializeField] private float panelFondo = 0.05f;
+    [Tooltip("Metros por encima del centro del plato.")]
+    [SerializeField] private float panelAltura = 0.05f;
+
+    [Header("Boton cerrar")]
+    [Tooltip("Boton poke que devuelve el plato a la mesa. Se muestra junto con el panel.")]
+    [SerializeField] private GameObject botonCerrar;
+    [Tooltip("Metros a la izquierda del plato.")]
+    [SerializeField] private float botonLado = 0.22f;
+    [Tooltip("Metros respecto al centro del plato (negativo = mas abajo).")]
+    [SerializeField] private float botonAltura = -0.02f;
+
     private Grabbable agarrable;
     private SnapInteractor snap;
     private RecetaManager manager;
@@ -46,6 +64,7 @@ public class InspeccionPlato : MonoBehaviour, ITransformer
     {
         agarrable = GetComponent<Grabbable>();
         snap = GetComponentInChildren<SnapInteractor>(true);
+        MostrarInfo(false);
         if (agarrable == null)
             Debug.LogWarning("[InspeccionPlato] " + name + ": falta el Grabbable.", this);
     }
@@ -90,6 +109,7 @@ public class InspeccionPlato : MonoBehaviour, ITransformer
         if (estado != Estado.Reposo)
             transform.SetPositionAndRotation(posOrigen, rotOrigen);
         estado = Estado.Reposo;
+        MostrarInfo(false);
 
         GrabFreeTransformer normal = GetComponent<GrabFreeTransformer>();
         agarrable.InjectOptionalOneGrabTransformer(normal);
@@ -117,6 +137,7 @@ public class InspeccionPlato : MonoBehaviour, ITransformer
             centroObjetivo = CalcularPuntoInspeccion();
             progreso = 0f;
             estado = Estado.Inspeccionando;
+            MostrarPanel();
         }
 
         tiempoSuelto = 0f;
@@ -158,10 +179,7 @@ public class InspeccionPlato : MonoBehaviour, ITransformer
                 tiempoSuelto += Time.deltaTime;
                 if (tiempoSuelto >= segundosAntesDeVolver)
                 {
-                    centroDesde = CentroActual();
-                    rotDesde = rotActual;
-                    progreso = 0f;
-                    estado = Estado.Regresando;
+                    EmpezarRegreso();
                 }
             }
             return;
@@ -197,6 +215,52 @@ public class InspeccionPlato : MonoBehaviour, ITransformer
         for (int i = 1; i < visuales.Length; i++)
             caja.Encapsulate(visuales[i].bounds);
         return caja.center;
+    }
+
+    /// <summary>Lo llama el boton "Cerrar": el plato vuelve a la mesa sin esperar.</summary>
+    public void Cerrar()
+    {
+        if (estado == Estado.Inspeccionando) EmpezarRegreso();
+    }
+
+    private void EmpezarRegreso()
+    {
+        centroDesde = CentroActual();
+        rotDesde = rotActual;
+        progreso = 0f;
+        estado = Estado.Regresando;
+        MostrarInfo(false);
+    }
+
+    private void MostrarInfo(bool visible)
+    {
+        if (panelInfo != null) panelInfo.SetActive(visible);
+        if (botonCerrar != null) botonCerrar.SetActive(visible);
+    }
+
+    // El panel (derecha) y el boton (izquierda) se colocan una vez al empezar la inspeccion,
+    // al lado del punto donde flota el plato, mirando al usuario.
+    private void MostrarPanel()
+    {
+        Transform ojos = camara != null ? camara : Camera.main != null ? Camera.main.transform : null;
+        if (ojos == null) return;
+
+        Vector3 frente = Vector3.ProjectOnPlane(centroObjetivo - ojos.position, Vector3.up);
+        if (frente.sqrMagnitude < 0.0001f) frente = Vector3.ProjectOnPlane(ojos.forward, Vector3.up);
+        frente.Normalize();
+        Vector3 derecha = Vector3.Cross(Vector3.up, frente);
+
+        Colocar(panelInfo, centroObjetivo + derecha * panelLado + frente * panelFondo + Vector3.up * panelAltura, ojos, frente);
+        Colocar(botonCerrar, centroObjetivo - derecha * botonLado + Vector3.up * botonAltura, ojos, frente);
+        MostrarInfo(true);
+    }
+
+    private static void Colocar(GameObject objeto, Vector3 posicion, Transform ojos, Vector3 frente)
+    {
+        if (objeto == null) return;
+        Vector3 mirada = Vector3.ProjectOnPlane(posicion - ojos.position, Vector3.up);
+        objeto.transform.SetPositionAndRotation(posicion,
+            Quaternion.LookRotation(mirada.sqrMagnitude > 0.0001f ? mirada : frente));
     }
 
     private Vector3 CalcularPuntoInspeccion()

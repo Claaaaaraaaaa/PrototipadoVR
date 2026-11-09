@@ -63,6 +63,9 @@ Todos los ingredientes con varias unidades (3 cebollas, 5 ajos, 2 plátanos) lle
 
 - **`InspeccionPlato`** (raíz de `Plato[BuildingBlock]`, con `Camara` = `CenterEyeAnchor`): con la receta completa apaga el `SnapInteractor` y se pone como transformador del `Grabbable`. Al agarrar, el plato flota frente al usuario y gira sobre su centro visual siguiendo la mano. Al soltarlo, espera `Segundos Antes De Volver` y regresa a su sitio. Antes de completar la receta, el agarre es normal.
 
+- **`Panel Info Rondon`** (raíz de la escena, inactivo): canvas blanco con título (`Tomarik-Introvert`) e historia del rondón (`Tomarik-Serif`), en marrón #26190D. `InspeccionPlato` lo coloca a la derecha del plato al empezar a inspeccionarlo (campos `Panel Lado`, `Panel Fondo` y `Panel Altura`) y lo oculta cuando el plato vuelve. El texto se edita en `Panel Info Rondon/Cuerpo`.
+- **`Boton Cerrar`** (raíz de la escena, inactivo): copia del botón poke del libro con el texto "Cerrar". Su `InteractableUnityEventWrapper` (When Select) llama a `InspeccionPlato.Cerrar()`, que devuelve el plato a la mesa sin esperar los segundos de `Segundos Antes De Volver`. Se muestra y oculta junto con el panel, a la izquierda del plato (campos `Boton Lado` y `Boton Altura`). La superficie poke mide 10 × 5 cm (escala 0.05 × `Model` 2×1).
+
 ## Recetario e interfaz VR
 
 - **`ControlRecetario`** (en `Receta manager`): al agarrar el libro de la barra (`Grabbable`) activa `AnclaLibro` y oculta `ZonasPaneles`. Mientras está abierto y el libro ya se soltó, apaga `Desactivar Mientras Abierto` (agarre a distancia y `HandGrabInteractable` del libro) para que no compitan con el rayo o el poke. `Cerrar()` lo revierte.
