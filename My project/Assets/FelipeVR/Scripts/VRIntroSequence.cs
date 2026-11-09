@@ -51,10 +51,39 @@ public class VRIntroSequence : MonoBehaviour
         StartCoroutine(PlayIntroSequence());
     }
 
+    // Tiempo maximo que cuenta un frame. Al cargar la escena (sobre todo al reiniciar desde la
+    // pantalla final) los primeros frames se congelan y, sin este tope, se "comian" la intro entera.
+    private const float MaxDeltaPorFrame = 1f / 30f;
+
+    private static float Delta()
+    {
+        return Mathf.Min(Time.deltaTime, MaxDeltaPorFrame);
+    }
+
+    private static IEnumerator Esperar(float segundos)
+    {
+        for (float t = 0f; t < segundos; t += Delta())
+            yield return null;
+    }
+
+    // Espera a que la carga termine: 10 frames seguidos fluidos, o 6 segundos como maximo.
+    private static IEnumerator EsperarFramesEstables()
+    {
+        float limite = Time.realtimeSinceStartup + 6f;
+        int estables = 0;
+        while (estables < 10 && Time.realtimeSinceStartup < limite)
+        {
+            estables = Time.unscaledDeltaTime < 0.05f ? estables + 1 : 0;
+            yield return null;
+        }
+    }
+
     private IEnumerator PlayIntroSequence()
     {
+        yield return EsperarFramesEstables();
+
         // FASE 1: Oscuridad total durante 2 segundos (Escenario oculto, Logo oculto)
-        yield return new WaitForSeconds(initialDarkDuration);
+        yield return Esperar(initialDarkDuration);
 
         // FASE 2: Aparece el logo con animación desvanecida sobre el fondo negro
         if (logoPanel != null)
@@ -67,7 +96,7 @@ public class VRIntroSequence : MonoBehaviour
         float elapsed = 0f;
         while (elapsed < logoFadeInDuration)
         {
-            elapsed += Time.deltaTime;
+            elapsed += Delta();
             float t = Mathf.Clamp01(elapsed / logoFadeInDuration);
             if (logoCanvasGroup != null)
             {
@@ -78,13 +107,13 @@ public class VRIntroSequence : MonoBehaviour
         if (logoCanvasGroup != null) logoCanvasGroup.alpha = 1f;
 
         // FASE 3: Sostener el logo visible sobre el fondo negro
-        yield return new WaitForSeconds(logoHoldDuration);
+        yield return Esperar(logoHoldDuration);
 
         // FASE 4: Se desvanece el fondo oscuro (revela el mapa de fondo mientras el logo sigue visible)
         elapsed = 0f;
         while (elapsed < darkFadeOutDuration)
         {
-            elapsed += Time.deltaTime;
+            elapsed += Delta();
             float t = Mathf.Clamp01(elapsed / darkFadeOutDuration);
             if (blackScreenCanvasGroup != null)
             {
@@ -102,7 +131,7 @@ public class VRIntroSequence : MonoBehaviour
         elapsed = 0f;
         while (elapsed < logoFadeOutDuration)
         {
-            elapsed += Time.deltaTime;
+            elapsed += Delta();
             float t = Mathf.Clamp01(elapsed / logoFadeOutDuration);
             if (logoCanvasGroup != null)
             {

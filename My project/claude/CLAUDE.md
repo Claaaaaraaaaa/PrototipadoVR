@@ -64,7 +64,18 @@ Todos los ingredientes con varias unidades (3 cebollas, 5 ajos, 2 plátanos) lle
 - **`InspeccionPlato`** (raíz de `Plato[BuildingBlock]`, con `Camara` = `CenterEyeAnchor`): con la receta completa apaga el `SnapInteractor` y se pone como transformador del `Grabbable`. Al agarrar, el plato flota frente al usuario y gira sobre su centro visual siguiendo la mano. Al soltarlo, espera `Segundos Antes De Volver` y regresa a su sitio. Antes de completar la receta, el agarre es normal.
 
 - **`Panel Info Rondon`** (raíz de la escena, inactivo): canvas blanco con título (`Tomarik-Introvert`) e historia del rondón (`Tomarik-Serif`), en marrón #26190D. `InspeccionPlato` lo coloca a la derecha del plato al empezar a inspeccionarlo (campos `Panel Lado`, `Panel Fondo` y `Panel Altura`) y lo oculta cuando el plato vuelve. El texto se edita en `Panel Info Rondon/Cuerpo`.
-- **`Boton Cerrar`** (raíz de la escena, inactivo): copia del botón poke del libro con el texto "Cerrar". Su `InteractableUnityEventWrapper` (When Select) llama a `InspeccionPlato.Cerrar()`, que devuelve el plato a la mesa sin esperar los segundos de `Segundos Antes De Volver`. Se muestra y oculta junto con el panel, a la izquierda del plato (campos `Boton Lado` y `Boton Altura`). La superficie poke mide 10 × 5 cm (escala 0.05 × `Model` 2×1).
+- **`Boton Cerrar`** (raíz de la escena, inactivo): copia del botón poke del libro con el texto "Cerrar". Su `InteractableUnityEventWrapper` (When Select) llama a `InspeccionPlato.Cerrar()`, que devuelve el plato a la mesa sin esperar los segundos de `Segundos Antes De Volver`. Se muestra y oculta junto con el panel, a la izquierda del plato (campos `Boton Lado` y `Boton Altura`). La superficie poke mide 10 × 5 cm (escala 0.05 × `Model` 2×1); el visual (`ButtonVisual`) quedó en 4×1 = 20 cm. El `Text (TMP)` es UGUI, así que fuera del libro necesita su propio Canvas (world space). Por eso está dentro de `ButtonVisual`, con escala 0.25×1×1 y z -0.05: queda delante del visual y se hunde con él. Pasa lo mismo en `Boton Reiniciar`.
+- **`Pantalla Final`** (raíz de la escena, script `PantallaFinal.cs`): se activa cuando el plato termina de volver a la mesa tras inspeccionarlo (evento `InspeccionPlato.InspeccionTerminada`). Espera `Espera Antes` (1.5 s) y funde a negro con el `FadeCanvas` de la intro (CanvasGroup dentro del Camera Rig). Luego hace lo siguiente:
+  - Apaga todos los Renderer y Canvas que no estén en el Camera Rig ni en `Pantalla Final`, así las manos siguen visibles.
+  - Pone la cámara en color sólido negro.
+  - Pausa todo el audio con `AudioListener.pause`. Solo `Ambiente/Musica` sigue sonando (`ignoreListenerPause`).
+  - Muestra `Contenido` a 0.55 m frente al usuario: el canvas `Creditos` y el `Boton Reiniciar`.
+  - `Creditos` es una pantalla negra de 920×590 unidades (46 × 29.5 cm). Hijos: `Logo` (TITULO.png), `Gracias`, `Creditos`, `Diseno Titulo` / `Diseno Nombres` (izquierda) y `Desarrollo Titulo` / `Desarrollo Nombres` (derecha). Los nombres van uno por línea.
+  - `Boton Reiniciar` es una copia de `Boton Cerrar` con `Model` 4×1, en gris 0.62. Está 1 cm delante de la parte baja de la pantalla.
+  - El vacío alrededor es gris oscuro (`Color Fondo`).
+  - `Reiniciar()` funde a negro y recarga la escena, con su intro. En el build la escena debe estar en Build Settings (por ahora solo está `Jake.unity`). En el editor se recarga igual con `EditorSceneManager.LoadSceneInPlayMode`.
+  - Para probar sin cocinar: en Play, clic derecho en el componente → **Mostrar ahora (prueba)**.
+  - `VRIntroSequence` (intro de Felipe, archivo en Windows-1252) espera 10 frames fluidos (máx. 6 s) antes de empezar y cuenta como máximo 1/30 s por frame. Sin esto, los tirones de carga al reiniciar se comían la aparición del logo.
 
 ## Recetario e interfaz VR
 

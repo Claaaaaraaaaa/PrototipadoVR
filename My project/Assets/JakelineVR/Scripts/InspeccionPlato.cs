@@ -42,6 +42,9 @@ public class InspeccionPlato : MonoBehaviour, ITransformer
     [Tooltip("Metros respecto al centro del plato (negativo = mas abajo).")]
     [SerializeField] private float botonAltura = -0.02f;
 
+    /// <summary>Se lanza cuando el plato termina de volver a la mesa despues de inspeccionarlo.</summary>
+    public event System.Action InspeccionTerminada;
+
     private Grabbable agarrable;
     private SnapInteractor snap;
     private RecetaManager manager;
@@ -192,6 +195,7 @@ public class InspeccionPlato : MonoBehaviour, ITransformer
         {
             transform.SetPositionAndRotation(posOrigen, rotOrigen);
             estado = Estado.Reposo;
+            InspeccionTerminada?.Invoke();
         }
     }
 
