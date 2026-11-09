@@ -320,6 +320,50 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: bocetos_9
+      rect:
+        serializedVersion: 2
+        x: 1342
+        y: 3587
+        width: 358
+        height: 499
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 29f067e5ba5638240a8bf054ec4d245e
+      internalID: 1949856327
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bocetos_10
+      rect:
+        serializedVersion: 2
+        x: 766
+        y: 2785
+        width: 308
+        height: 429
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad8780a62aec21949b00e482c67bd4d3
+      internalID: -1008192935
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -338,6 +382,7 @@ TextureImporter:
     nameFileIdTable:
       bocetos_0: 2006525584
       bocetos_1: -783646149
+      bocetos_10: -1008192935
       bocetos_2: 1545052380
       bocetos_3: 1979512103
       bocetos_4: -951752755
@@ -345,6 +390,7 @@ TextureImporter:
       bocetos_6: -1077674820
       bocetos_7: -535571086
       bocetos_8: 242102356
+      bocetos_9: 1949856327
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
