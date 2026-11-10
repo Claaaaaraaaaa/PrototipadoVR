@@ -271,6 +271,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LogoCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 72702663265078966, guid: 2fcaac896afb599498a5dd4fc6ae88ba, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1476773342690453440, guid: 2fcaac896afb599498a5dd4fc6ae88ba, type: 3}
       propertyPath: m_SortingOrder
       value: 101
@@ -20414,6 +20418,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1243174868}
     m_Modifications:
+    - target: {fileID: 1667638204159642821, guid: 60e54ab6334b56a478121b7cd02c874b, type: 3}
+      propertyPath: _constraints.MaxAngle.Value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1667638204159642821, guid: 60e54ab6334b56a478121b7cd02c874b, type: 3}
+      propertyPath: _constraints.MinAngle.Value
+      value: -90
+      objectReference: {fileID: 0}
     - target: {fileID: 3475254912587966010, guid: 60e54ab6334b56a478121b7cd02c874b, type: 3}
       propertyPath: m_LocalScale.x
       value: 100.000015
@@ -25608,6 +25620,10 @@ PrefabInstance:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 2100000, guid: 7295bf4f420d40cc886971ce9de5b286, type: 2}
+    - target: {fileID: 6072353988008033563, guid: 212d75435fd16d6498dece32d03af71a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.45
+      objectReference: {fileID: 0}
     - target: {fileID: 7553361483313590567, guid: 212d75435fd16d6498dece32d03af71a, type: 3}
       propertyPath: instanceId
       value: 88a9925d-ca8b-406b-82f7-5f71d87b4d00
