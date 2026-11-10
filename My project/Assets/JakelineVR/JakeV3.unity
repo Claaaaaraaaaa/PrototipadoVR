@@ -25407,6 +25407,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5136328527879596535, guid: 212d75435fd16d6498dece32d03af71a, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 2100000, guid: 7295bf4f420d40cc886971ce9de5b286, type: 2}
     - target: {fileID: 7806248218047953967, guid: 212d75435fd16d6498dece32d03af71a, type: 3}
       propertyPath: m_SortingOrder
       value: 100
@@ -37484,7 +37488,7 @@ MeshRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 102
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &1900000523
@@ -38423,7 +38427,7 @@ MeshRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 102
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &1900000663
@@ -39556,7 +39560,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 101
+  m_SortingOrder: 103
   m_TargetDisplay: 0
 --- !u!223 &1900000752
 Canvas:
@@ -39579,7 +39583,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 101
+  m_SortingOrder: 103
   m_TargetDisplay: 0
 --- !u!1 &1900636229
 GameObject:

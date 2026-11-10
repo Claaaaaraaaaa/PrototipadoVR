@@ -38,21 +38,8 @@ public class PantallaFinal : MonoBehaviour
     private void Awake()
     {
         if (contenido != null) contenido.SetActive(false);
-        FundidoSiempreEncima();
-    }
-
-    // El FadeCanvas es una lamina a 1 m de los ojos: lo que esta mas cerca (suelo, meson) la
-    // atravesaba. Con ZTest Always tapa todo sin importar la distancia. El logo y los creditos
-    // usan un sorting order mayor (101 contra 100) para dibujarse encima del negro.
-    private void FundidoSiempreEncima()
-    {
-        if (fundido == null) return;
-        foreach (UnityEngine.UI.Graphic grafico in fundido.GetComponentsInChildren<UnityEngine.UI.Graphic>(true))
-        {
-            Material material = new Material(grafico.material);
-            material.SetInt("unity_GUIZTestMode", (int)UnityEngine.Rendering.CompareFunction.Always);
-            grafico.material = material;
-        }
+        // El negro del FadeCanvas usa el material UI/FundidoEncima (asignado en la escena), que tapa
+        // todo sin importar la distancia; el logo y los creditos van encima por sorting order (101 > 100).
     }
 
     private void Start()

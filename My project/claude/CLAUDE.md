@@ -75,7 +75,12 @@ Todos los ingredientes con varias unidades (3 cebollas, 5 ajos, 2 plátanos) lle
   - El vacío alrededor es gris oscuro (`Color Fondo`).
   - `Reiniciar()` funde a negro y recarga la escena, con su intro. En el build la escena debe estar en Build Settings (por ahora solo está `Jake.unity`). En el editor se recarga igual con `EditorSceneManager.LoadSceneInPlayMode`.
   - Para probar sin cocinar: en Play, clic derecho en el componente → **Mostrar ahora (prueba)**.
-  - **Orden de dibujo del negro:** `PantallaFinal.Awake` pone el `FadeCanvas` con `ZTest Always` (`unity_GUIZTestMode`), así lo cercano (suelo, mesón) ya no atraviesa el negro. En la escena, el `FadeCanvas` tiene sorting order 100. `LogoCanvas`, `Creditos` y los canvas de texto de `Boton Cerrar` y `Boton Reiniciar` tienen 101, para que queden encima del negro. Un canvas nuevo que deba verse sobre el fundido necesita order > 100.
+  - **Orden de dibujo:** la imagen negra del `FadeCanvas` usa el material `UI/FundidoEncima.mat` (shader `JakelineVR/UI Encima`, con `ZTest Always`), asignado como override del prefab Camera Rig en la escena. Así lo cercano (suelo, mesón) ya no atraviesa el negro desde el primer frame. Sorting orders:
+    - `FadeCanvas`: 100.
+    - `LogoCanvas` y `Creditos`: 101.
+    - Visual (MeshRenderer) de `Boton Cerrar` y `Boton Reiniciar`: 102.
+    - Canvas de texto de esos botones: 103.
+    - Un canvas nuevo que deba verse sobre el fundido necesita order > 100. Sobre el panel de créditos necesita > 101.
   - `VRIntroSequence` (intro de Felipe, archivo en Windows-1252) está duplicado: un `IntroManager` en la raíz y otro dentro del prefab `LogoCanvas`, con `logoPanel` = el propio LogoCanvas. Según el orden de `Awake`, que cambia al recargar, la copia interna volvía a ocultar el logo justo cuando aparecía. Ahora, si el script está dentro de su propio `logoPanel`, se desactiva en `Awake` sin hacer nada.
 
 ## Recetario e interfaz VR
