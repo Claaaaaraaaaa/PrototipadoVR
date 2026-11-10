@@ -267,6 +267,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1476773342690453440, guid: 2fcaac896afb599498a5dd4fc6ae88ba, type: 3}
+      propertyPath: m_SortingOrder
+      value: 101
+      objectReference: {fileID: 0}
     - target: {fileID: 72702663265078966, guid: 2fcaac896afb599498a5dd4fc6ae88ba, type: 3}
       propertyPath: m_Name
       value: LogoCanvas
@@ -25403,6 +25407,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7806248218047953967, guid: 212d75435fd16d6498dece32d03af71a, type: 3}
+      propertyPath: m_SortingOrder
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 383678933450500768, guid: 212d75435fd16d6498dece32d03af71a, type: 3}
       propertyPath: instanceId
       value: 111938b4-5b33-498a-8292-3296a596981d
@@ -37798,7 +37806,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 101
   m_TargetDisplay: 0
 --- !u!1 &1900000641
 GameObject:
@@ -39548,7 +39556,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 101
   m_TargetDisplay: 0
 --- !u!223 &1900000752
 Canvas:
@@ -39571,7 +39579,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 101
   m_TargetDisplay: 0
 --- !u!1 &1900636229
 GameObject:
