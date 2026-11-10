@@ -29,15 +29,6 @@ public class VRIntroSequence : MonoBehaviour
 
     private void Awake()
     {
-        // El prefab LogoCanvas trae otra copia de este script dentro del propio logo. Esa copia,
-        // al activarse el logo, lo volvia a ocultar (segun el orden de Awake, que cambia al recargar
-        // la escena). Si este script esta dentro de su propio logoPanel, es la copia: no hace nada.
-        if (logoPanel != null && transform.IsChildOf(logoPanel.transform))
-        {
-            enabled = false;
-            return;
-        }
-
         // 1. Ocultar el logo desde el fotograma 0
         if (logoPanel != null) logoPanel.SetActive(false);
         if (logoCanvasGroup != null) logoCanvasGroup.alpha = 0f;
