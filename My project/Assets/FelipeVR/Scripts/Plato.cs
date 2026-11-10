@@ -22,8 +22,10 @@ public class Plato : MonoBehaviour
                 hijo.gameObject.SetActive(false);
     }
 
-    private void MostrarComida()
+    /// <summary>Muestra la comida sin pasar por el cucharon (tambien lo usa RecetaDebugInput).</summary>
+    public void MostrarComida()
     {
+        estaServido = true;
         foreach (Transform hijo in transform)
             hijo.gameObject.SetActive(true);
     }

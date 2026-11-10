@@ -59,8 +59,9 @@ public class PantallaFinal : MonoBehaviour
         StartCoroutine(Mostrar());
     }
 
+    /// <summary>PRUEBA: muestra la pantalla final sin esperar (menu del componente o tecla P de RecetaDebugInput).</summary>
     [ContextMenu("Mostrar ahora (prueba)")]
-    private void MostrarAhora()
+    public void MostrarAhora()
     {
         if (!Application.isPlaying || mostrada) return;
         mostrada = true;

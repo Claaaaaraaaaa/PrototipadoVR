@@ -15,7 +15,7 @@ Patrón general: **algo en la escena detecta una acción → `RecetaEventos.Noti
 |---|---|---|
 | `RecetaEventos` (estático) | En ningún objeto | Canal de eventos. Constantes de Ids y `EnOlla(id)` → `"olla_" + id` |
 | `RecetaManager` | Objeto **`Receta manager`** (raíz, **siempre activo**) | Singleton `Instancia`. Pasos con sub-pasos. Lista `Pasos` del Inspector **vacía** → usa `PasosPorDefecto()` del código |
-| `RecetaDebugInput` | Mismo objeto | Solo pruebas: **N** avanzar, **B** deshacer, **R** reiniciar, **I** completar todo hasta la estufa (también casilla en el Inspector y menú ⋮) |
+| `RecetaDebugInput` | Mismo objeto | Solo pruebas: **N** avanzar, **B** deshacer, **R** reiniciar, **I** completar todo hasta la estufa (también casilla en el Inspector y menú ⋮), **F** completar toda la receta con el plato servido (listo para inspeccionar), **P** completar todo y saltar a la pantalla final (F y P también en el menú ⋮) |
 | `RecetaPasosUI` | Cada TextMeshPro de pasos del libro | Pinta `[  ]`/`[X]`, tacha, sub-pasos con sangría, progreso `(3/8)`, negrita en el paso actual. Se refresca en `OnEnable` |
 | `NavegacionRecetario` | `Recetario` (canvas del libro) | 2 páginas, vuelve a la 1 en `OnEnable`, antirrebote de 0.5 s para el poke |
 
@@ -75,7 +75,7 @@ Todos los ingredientes con varias unidades (3 cebollas, 5 ajos, 2 plátanos) lle
   - El vacío alrededor es gris oscuro (`Color Fondo`).
   - `Reiniciar()` funde a negro y recarga la escena, con su intro. En el build la escena debe estar en Build Settings (por ahora solo está `Jake.unity`). En el editor se recarga igual con `EditorSceneManager.LoadSceneInPlayMode`.
   - Para probar sin cocinar: en Play, clic derecho en el componente → **Mostrar ahora (prueba)**.
-  - `VRIntroSequence` (intro de Felipe, archivo en Windows-1252) espera 10 frames fluidos (máx. 6 s) antes de empezar y cuenta como máximo 1/30 s por frame. Sin esto, los tirones de carga al reiniciar se comían la aparición del logo.
+  - `VRIntroSequence` (intro de Felipe, archivo en Windows-1252) está duplicado: un `IntroManager` en la raíz y otro dentro del prefab `LogoCanvas`, con `logoPanel` = el propio LogoCanvas. Según el orden de `Awake`, que cambia al recargar, la copia interna volvía a ocultar el logo justo cuando aparecía. Ahora, si el script está dentro de su propio `logoPanel`, se desactiva en `Awake` sin hacer nada.
 
 ## Recetario e interfaz VR
 
