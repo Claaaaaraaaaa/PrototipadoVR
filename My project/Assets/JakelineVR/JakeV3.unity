@@ -25576,6 +25576,10 @@ PrefabInstance:
       propertyPath: instanceId
       value: 111938b4-5b33-498a-8292-3296a596981d
       objectReference: {fileID: 0}
+    - target: {fileID: 3064606213887352775, guid: 212d75435fd16d6498dece32d03af71a, type: 3}
+      propertyPath: requestScenePermissionOnStartup
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3794966628668704757, guid: 212d75435fd16d6498dece32d03af71a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.03

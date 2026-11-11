@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/JakelineVR/Jake.unity
-    guid: 2da1bf58cfc7ab0479954ae693cc3c59
+    path: Assets/JakelineVR/JakeV3.unity
+    guid: fb5413fac17487345a543290f2b6b184
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 717e746773ceda34eb31f7bf6e5528ca, type: 2}
