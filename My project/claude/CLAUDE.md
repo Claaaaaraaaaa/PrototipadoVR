@@ -58,6 +58,11 @@ Todos los ingredientes con varias unidades (3 cebollas, 5 ajos, 2 plátanos) lle
   - El `Interactable Unity Event Wrapper` de la perilla debe llamar a **`ControlFogon.AlternarFogon()`** en `When Select`, **nunca** a `GameObject.SetActive` del fuego directamente: eso se saltaría la comprobación.
 - **`Cucharon`** (`Cucharón [BuildingBlock]/CucharonMaster`): se llena al tocar una olla con `OllaEstado.EstadoActual == Rondon` (ya no busca por nombre, porque los colliders del rondón están apagados). Notifica `cucharon_lleno` solo si los pasos anteriores están completos.
 - **`Plato`** (`Plato[BuildingBlock]/rondon en plato`): al tocarlo el cucharón lleno, vacía el cucharón, muestra la comida y notifica `cucharon_servido` si los pasos previos están completos. Si no lo están, no cuenta, pero se puede volver a llenar el cucharón y servir otra vez.
+  - **Modelos definitivos:** el menú **JakelineVR > Reemplazar modelo del plato** (`JakelineVR/Scripts/Editor/ReemplazarModeloPlato.cs`) cambia el provisional `rondon en plato` por `Plato[BuildingBlock]/Plato Logica`.
+    - Componentes de `Plato Logica`: `Plato`, `BoxCollider` (trigger), `SnapInteractor` y `TagSet` "Plato", copiados del viejo.
+    - Hijos de `Plato Logica`: `PLATOOOPORFIN` (vacío, de `Claaaaaraaaaa/OBJETOS PINTADOS`) y `plaatorondonbx` (servido, de `JakelineVR/Picados_ingredientes`, oculto).
+    - Los modelos se escalan al diámetro del plato viejo y se apoyan a su misma altura. El collider se ajusta a la malla, con una altura mínima de 6 cm.
+    - `Plato` tiene los campos opcionales `platoVacio` y `platoServido`. Si los dos están asignados, al servir cambia uno por el otro. Si no, conserva el comportamiento viejo (mostrar todos los hijos menos `nombreBasePlato`).
 
 - **`SnapNotificarPaso`** (`SnapZonePlato`, junto al `SnapInteractable`, que usa el Rigidbody de `SnapDetectionPlato`): cuando el plato encaja al soltarlo, notifica `plato_en_mesa`. No exige que esté servido ni que los pasos anteriores estén completos.
 
